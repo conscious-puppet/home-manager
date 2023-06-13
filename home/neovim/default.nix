@@ -10,6 +10,7 @@
   ];
   programs.neovim = {
     enable = true;
+    defaultEditor = true;
 
     extraPackages = [
       pkgs.lazygit

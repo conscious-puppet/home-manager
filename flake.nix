@@ -28,11 +28,12 @@
         };
       };
 
-      perSystem = { self', pkgs, ... }:
+      perSystem = { self', pkgs, system, ... }:
         let
           myUserName = "abhisheksingh";
         in
         {
+          _module.args.pkgs = import inputs.nixpkgs { inherit system; config.allowUnfree = true; };
           legacyPackages.homeConfigurations.${myUserName} =
             self.nixos-flake.lib.mkHomeConfiguration
               pkgs
