@@ -3,11 +3,13 @@
 #
 # https://nix-community.github.io/home-manager/index.html#sec-usage-configuration
 { pkgs, ... }: {
-  # imports = [
-  #   # This loads ./home/neovim/default.nix - neovim configured for Haskell dev, and other things.
-  #   ./home/neovim
-  #   # Add more of your home-manager modules here.
-  # ];
+  imports = [
+    # This loads ./home/neovim/default.nix - neovim configured for Haskell dev, and other things.
+    # ./home/neovim
+    # Add more of your home-manager modules here.
+    ./home/wezterm.nix
+    ./home/emacs.nix
+  ];
 
   # Nix packages to install to $HOME
   #
@@ -25,7 +27,6 @@
     tmate
     jq
     fzf
-    wezterm
     nodejs
     neovim
     # lapce
@@ -34,6 +35,7 @@
     graphviz
     watch
     gnuplot
+    toipe
   ];
 
   # Programs natively supported by home-manager.
