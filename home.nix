@@ -14,7 +14,10 @@
   # Nix packages to install to $HOME
   #
   # Search for packages here: https://search.nixos.org/packages
-  home.packages = with pkgs; [
+  home.packages = let 
+    darwinPackages = if pkgs.system == "aarch64-darwin" || pkgs.system == "x86_64-darwin"  then with pkgs; [ raycast ] else [];
+    in
+  with pkgs; [
     nix-output-monitor # https://github.com/maralorn/nix-output-monitor
     nix-info
     cachix
@@ -32,12 +35,12 @@
     emacs
     # lapce
     # meld
-    raycast
+    # raycast
     graphviz
     watch
     gnuplot
     toipe
-  ];
+  ] ++ darwinPackages;
 
   # Programs natively supported by home-manager.
   programs = {
