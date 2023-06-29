@@ -9,6 +9,7 @@
     # Add more of your home-manager modules here.
     ./home/zsh.nix
     ./home/wezterm.nix
+    ./home/tmux.nix
   ];
 
   # Nix packages to install to $HOME
