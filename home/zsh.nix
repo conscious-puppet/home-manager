@@ -118,6 +118,14 @@
         fi
       }
 
+      start-ngrok() {
+        tmux has-session -t=ngrok 2>/dev/null
+        if [ $? -ne 0 ]; then
+          tmux new -d -s ngrok
+          tmux send-keys -t ngrok "ngrok tcp 22" Enter "\x" Enter
+        fi
+      }
+
       flush-dev() {
         tmux has-session -t=pgres 2>/dev/null
         if [ $? -eq 0 ]; then
