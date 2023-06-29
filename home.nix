@@ -28,7 +28,6 @@
       nil # Nix language server
       shfmt
       nixpkgs-fmt
-      tmux
       tmate
       jq
       fzf
