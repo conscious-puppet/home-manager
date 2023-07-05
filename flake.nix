@@ -33,18 +33,25 @@
       };
 
       perSystem = { self', pkgs, system, ... }:
-        let
-          myUserName = "abhisheksingh";
-        in
         {
           _module.args.pkgs = import inputs.nixpkgs { inherit system; config.allowUnfree = true; };
-          legacyPackages.homeConfigurations.${myUserName} =
+          legacyPackages.homeConfigurations.abhisheksingh =
             self.nixos-flake.lib.mkHomeConfiguration
               pkgs
               ({ pkgs, ... }: {
                 imports = [ self.homeModules.default ];
-                home.username = myUserName;
-                home.homeDirectory = "/${if pkgs.stdenv.isDarwin then "Users" else "home"}/${myUserName}";
+                home.username = "abhisheksingh";
+                home.homeDirectory = "/${if pkgs.stdenv.isDarwin then "Users" else "home"}/abhisheksingh";
+                home.stateVersion = "22.11";
+              });
+
+          legacyPackages.homeConfigurations."abhishek.singh1@identity.juspay.net" =
+            self.nixos-flake.lib.mkHomeConfiguration
+              pkgs
+              ({ pkgs, ... }: {
+                imports = [ self.homeModules.default ];
+                home.username = "abhishek.singh1@identity.juspay.net";
+                home.homeDirectory = "/${if pkgs.stdenv.isDarwin then "Users" else "home"}/abhisheksingh";
                 home.stateVersion = "22.11";
               });
 
@@ -53,7 +60,8 @@
 
           # Enable 'nix build' to build the home configuration, but without
           # activating.
-          packages.default = self'.legacyPackages.homeConfigurations.${myUserName}.activationPackage;
+          # packages.default = self'.legacyPackages.homeConfigurations.${myUserName}.activationPackage;
+          # packages.default = self'.legacyPackages.homeConfigurations.abhisheksingh.activationPackage;
         };
     };
 }

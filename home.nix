@@ -42,6 +42,7 @@
       gnuplot
       toipe
       ngrok
+      inlyne # A GPU powered browserless markdown viewer
     ] ++ darwinPackages;
 
   # Programs natively supported by home-manager.
