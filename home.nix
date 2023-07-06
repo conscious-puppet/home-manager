@@ -20,6 +20,7 @@
       darwinPackages = if pkgs.system == "aarch64-darwin" || pkgs.system == "x86_64-darwin" then with pkgs; [ raycast ] else [ ];
     in
     with pkgs; [
+      btop
       nix-output-monitor # https://github.com/maralorn/nix-output-monitor
       nix-info
       cachix
@@ -42,7 +43,7 @@
       gnuplot
       toipe
       ngrok
-      inlyne # A GPU powered browserless markdown viewer
+      mdcat # cat for markdown
     ] ++ darwinPackages;
 
   # Programs natively supported by home-manager.
