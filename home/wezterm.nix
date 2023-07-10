@@ -56,6 +56,7 @@
       	        hide_tab_bar_if_only_one_tab = true,
       	        native_macos_fullscreen_mode = true,
       	        keys = keys,
+      	        audible_bell = "Disabled",
               })
 
               -- and finally, return the configuration to wezterm

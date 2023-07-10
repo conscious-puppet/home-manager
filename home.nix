@@ -20,6 +20,7 @@
       darwinPackages = if pkgs.system == "aarch64-darwin" || pkgs.system == "x86_64-darwin" then with pkgs; [ raycast ] else [ ];
     in
     with pkgs; [
+      lldb
       btop
       nix-output-monitor # https://github.com/maralorn/nix-output-monitor
       nix-info
