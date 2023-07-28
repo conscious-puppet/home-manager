@@ -45,6 +45,16 @@
                 home.stateVersion = "22.11";
               });
 
+          legacyPackages.homeConfigurations.abhishek =
+            self.nixos-flake.lib.mkHomeConfiguration
+              pkgs
+              ({ pkgs, ... }: {
+                imports = [ self.homeModules.default ];
+                home.username = "abhishek";
+                home.homeDirectory = "/${if pkgs.stdenv.isDarwin then "Users" else "home"}/abhishek";
+                home.stateVersion = "22.11";
+              });
+
           legacyPackages.homeConfigurations."abhishek.singh1@identity.juspay.net" =
             self.nixos-flake.lib.mkHomeConfiguration
               pkgs

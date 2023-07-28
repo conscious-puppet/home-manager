@@ -19,6 +19,7 @@
       k = "kubectl";
       lsp-stash = "git update-index --no-skip-worktree cabal.project cabal.project.freeze && git restore cabal.project cabal.project.freeze";
       lsp-apply = "git update-index --skip-worktree cabal.project cabal.project.freeze";
+      sshL = "ssh -L 127.0.0.1:5601:127.0.0.1:5601 -L 127.0.0.1:8013:127.0.0.1:8013 -L 127.0.0.1:3000:127.0.0.1:3000 -L 127.0.0.1:8081:127.0.0.1:8080";
     };
     enableAutosuggestions = true;
     initExtra = ''
