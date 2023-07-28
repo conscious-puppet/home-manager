@@ -20,6 +20,7 @@
       lsp-stash = "git update-index --no-skip-worktree cabal.project cabal.project.freeze && git restore cabal.project cabal.project.freeze";
       lsp-apply = "git update-index --skip-worktree cabal.project cabal.project.freeze";
       sshL = "ssh -L 127.0.0.1:5601:127.0.0.1:5601 -L 127.0.0.1:8013:127.0.0.1:8013 -L 127.0.0.1:3000:127.0.0.1:3000 -L 127.0.0.1:8081:127.0.0.1:8080";
+      tmux = "tmux -u";
     };
     enableAutosuggestions = true;
     initExtra = ''
@@ -73,7 +74,7 @@
         ) && cd ~/$dir
       }
 
-      alias t="tmux attach || tmux new"
+      alias t="tmux -u attach || tmux -u new"
       p() {
         local dir
         local pdir=$(pwd)
@@ -83,74 +84,74 @@
             fzf --read0
         ) && cd ~/$dir
         local sessionname="$(basename -- $dir)"
-        tmux new-session -A -s $sessionname
+        tmux -u new-session -A -s $sessionname
         cd $pdir
       }
 
       setup-dev() {
-        tmux has-session -t=pgres 2>/dev/null
+        tmux -u has-session -t=pgres 2>/dev/null
         if [ $? -ne 0 ]; then
-          tmux new -d -s pgres -c ~/work
-          tmux send-keys -t pgres "psql -d testdb -U bilbo" Enter "\x" Enter
+          tmux -u new -d -s pgres -c ~/work
+          tmux -u send-keys -t pgres "psql -d testdb -U bilbo" Enter "\x" Enter
         fi
 
-        tmux has-session -t=redis-cli 2>/dev/null
+        tmux -u has-session -t=redis-cli 2>/dev/null
         if [ $? -ne 0 ]; then
-          tmux new -d -s redis-cli -c ~/work
-          tmux send-keys -t redis-cli "redis-cli" Enter
+          tmux -u new -d -s redis-cli -c ~/work
+          tmux -u send-keys -t redis-cli "redis-cli" Enter
         fi
 
-        tmux has-session -t=ghci 2>/dev/null
+        tmux -u has-session -t=ghci 2>/dev/null
         if [ $? -ne 0 ]; then
-          tmux new -d -s ghci -c ~/work
-          tmux send-keys -t ghci "ghci" Enter
+          tmux -u new -d -s ghci -c ~/work
+          tmux -u send-keys -t ghci "ghci" Enter
         fi
 
-        tmux has-session -t=npci-mocking 2>/dev/null
+        tmux -u has-session -t=npci-mocking 2>/dev/null
         if [ $? -ne 0 ]; then
-          tmux new -d -s npci-mocking -c ~/work/npci-mocking/
-          tmux send-keys -t npci-mocking "node app.js" Enter
+          tmux -u new -d -s npci-mocking -c ~/work/npci-mocking/
+          tmux -u send-keys -t npci-mocking "node app.js" Enter
         fi
 
-        tmux has-session -t=newton-hs 2>/dev/null
+        tmux -u has-session -t=newton-hs 2>/dev/null
         if [ $? -ne 0 ]; then
-          tmux new -d -s newton-hs -c ~/work/newton-hs/
-          tmux send-keys -t newton-hs "v" Enter
+          tmux -u new -d -s newton-hs -c ~/work/newton-hs/
+          tmux -u send-keys -t newton-hs "v" Enter
         fi
       }
 
       start-ngrok() {
-        tmux has-session -t=ngrok 2>/dev/null
+        tmux -u has-session -t=ngrok 2>/dev/null
         if [ $? -ne 0 ]; then
-          tmux new -d -s ngrok
-          tmux send-keys -t ngrok "ngrok tcp 22" Enter "\x" Enter
+          tmux -u new -d -s ngrok
+          tmux -u send-keys -t ngrok "ngrok tcp 22" Enter "\x" Enter
         fi
       }
 
       flush-dev() {
-        tmux has-session -t=pgres 2>/dev/null
+        tmux -u has-session -t=pgres 2>/dev/null
         if [ $? -eq 0 ]; then
-          tmux kill-session -t pgres
+          tmux -u kill-session -t pgres
         fi
 
-        tmux has-session -t=redis-cli 2>/dev/null
+        tmux -u has-session -t=redis-cli 2>/dev/null
         if [ $? -eq 0 ]; then
-          tmux kill-session -t redis-cli
+          tmux -u kill-session -t redis-cli
         fi
 
-        tmux has-session -t=ghci 2>/dev/null
+        tmux -u has-session -t=ghci 2>/dev/null
         if [ $? -eq 0 ]; then
-          tmux kill-session -t ghci
+          tmux -u kill-session -t ghci
         fi
 
-        tmux has-session -t=npci-mocking 2>/dev/null
+        tmux -u has-session -t=npci-mocking 2>/dev/null
         if [ $? -eq 0 ]; then
-          tmux kill-session -t npci-mocking
+          tmux -u kill-session -t npci-mocking
         fi
 
-        tmux has-session -t=newton-hs 2>/dev/null
+        tmux -u has-session -t=newton-hs 2>/dev/null
         if [ $? -eq 0 ]; then
-          tmux kill-session -t newton-hs
+          tmux -u kill-session -t newton-hs
         fi
       }
 

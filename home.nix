@@ -32,6 +32,7 @@
       nixpkgs-fmt
       tmate
       jq
+      fd
       fzf
       nodejs
       neovim
