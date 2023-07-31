@@ -18,6 +18,7 @@
   home.packages =
     let
       darwinPackages = if pkgs.system == "aarch64-darwin" || pkgs.system == "x86_64-darwin" then with pkgs; [ raycast ] else [ ];
+      linuxPackages = if pkgs.system == "aarch64-linux" || pkgs.system == "x86_64-linux" then with pkgs; [ xclip ] else [ ];
     in
     with pkgs; [
       lldb
@@ -46,7 +47,7 @@
       toipe
       ngrok
       mdcat # cat for markdown
-    ] ++ darwinPackages;
+    ] ++ darwinPackages ++ linuxPackages;
 
   # Programs natively supported by home-manager.
   programs = {
