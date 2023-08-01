@@ -18,9 +18,10 @@
   home.packages =
     let
       darwinPackages = if pkgs.system == "aarch64-darwin" || pkgs.system == "x86_64-darwin" then with pkgs; [ raycast ] else [ ];
-      linuxPackages = if pkgs.system == "aarch64-linux" || pkgs.system == "x86_64-linux" then with pkgs; [ xclip ] else [ ];
+      linuxPackages = if pkgs.system == "aarch64-linux" || pkgs.system == "x86_64-linux" then with pkgs; [ ] else [ ];
     in
     with pkgs; [
+      gcc
       lldb
       btop
       nix-output-monitor # https://github.com/maralorn/nix-output-monitor
