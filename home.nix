@@ -36,7 +36,6 @@
       jq
       fd
       fzf
-      nodejs
       neovim
       emacs
       # lapce
