@@ -83,6 +83,10 @@ in
       nil
       nixpkgs-fmt
       statix
+      # sh
+      shfmt
+      # json
+      jq
       # Python
       pyright
       black

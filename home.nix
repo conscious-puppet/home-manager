@@ -29,15 +29,8 @@
       nix-info
       cachix
       lazygit # Better git UI
-      ripgrep # Better `grep`
-      nil # Nix language server
-      shfmt
-      nixpkgs-fmt
       tmate
-      jq
-      fd
       fzf
-      # neovim
       emacs
       # lapce
       # meld

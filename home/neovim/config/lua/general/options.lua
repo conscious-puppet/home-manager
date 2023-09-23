@@ -50,7 +50,7 @@ set.spelllang      = { 'en_us' } -- spell check
 -- set.shell          = "/bin/zsh" -- set zsh as shell for integrated terminal
 set.timeout        = false -- don't timeout on pressing leader key
 set.fillchars      = set.fillchars + 'diff:╱' + 'fold: '
-set.shortmess      = set.shortmess + "atI" -- I to remove intro screen for now
+-- set.shortmess      = set.shortmess + "atI" -- I to remove intro screen for now
 -- set.guicursor      = "" -- set cursor to block even in insert mode
 set.listchars:append("nbsp:␣") -- show tabs and spaces
 -- set.listchars:append("eol:↴") -- show tabs and spaces
