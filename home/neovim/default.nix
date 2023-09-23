@@ -1,145 +1,111 @@
-{ config, pkgs, lib, ... }:
-with lib;
+{ config, pkgs, ... }:
 let
-  python-debug = pkgs.python3.withPackages (p: with p; [ debugpy ]);
+  toLua = str: "lua << EOF\n${str}\nEOF\n";
+  toLuaFile' = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+  toLuaFile = file: ":luafile ${file}";
 in
 {
-    programs.neovim = {
-      # package = pkgs.neovim-nightly;
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
 
-      plugins = with pkgs.vimPlugins; [
-        # Basics
-        vim-sensible
-        # Add syntax/detection/indentation for langs
-        vim-elixir
-        vim-nix
-        kotlin-vim
-        dart-vim-plugin
-        vim-flutter
+    plugins = with pkgs.vimPlugins; [
+      nvim-autopairs
+      # Completions
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      nvim-cmp
 
-        # File Tree
-        nvim-web-devicons
-        nvim-tree-lua
-        # Status line
-        feline-nvim
-        # Git info
-        gitsigns-nvim
-        # Indent lines
-        indent-blankline-nvim
-        # Auto close
-        nvim-autopairs
-        # Fuzzy finder window
-        telescope-nvim
-        # Diagnostics window
-        trouble-nvim
-        # Keybindings window
-        legendary-nvim
-        # Better native input/select windows
-        dressing-nvim
-        # Tabs
-        bufferline-nvim
-        # Smooth scrolling
-        vim-smoothie
-        # Peek line search
-        numb-nvim
-        # Fast navigation
-        leap-nvim
-        # Rainbow brackets
-        nvim-ts-rainbow
-        # Notify window
-        nvim-notify
-        # Commenting
-        comment-nvim
+      # Snippets
+      luasnip
+      cmp_luasnip
 
-        # Syntax highlighting
-        nvim-treesitter.withAllGrammars
+      telescope-nvim
 
-        # LSP
-        nvim-lspconfig
-        nvim-lsp-ts-utils
-        # Mostly for linting
-        null-ls-nvim
-        # LSP status window
-        fidget-nvim
-        # Code actions sign
-        nvim-lightbulb
-        # Highlight selected symbol
-        vim-illuminate
+      # theme
+      kanagawa-nvim
 
-        # Completions
-        cmp-nvim-lsp
-        cmp-buffer
-        cmp-path
-        cmp-cmdline
-        cmp-nvim-lsp-signature-help
-        nvim-cmp
-        lspkind-nvim
+      nvim-colorizer-lua
+      indent-blankline-nvim
 
-        # Snippets
-        luasnip
-        cmp_luasnip
+      # git
+      vim-fugitive
+      diffview-nvim
+      gitsigns-nvim
+      vim-merginal
 
-        # Debug adapter protocol
-        nvim-dap
-        telescope-dap-nvim
-        nvim-dap-ui
-        nvim-dap-virtual-text
+      # lsp
+      fidget-nvim
+      nvim-lspconfig
+      nvim-lsp-ts-utils
+      rust-tools-nvim
+      # Diagnostics window
+      trouble-nvim
 
-        # theming
-        nord-nvim
-      ];
+      # Syntax highlighting
+      nvim-treesitter.withAllGrammars
+      nvim-ts-context-commentstring
 
-      extraPackages = with pkgs; [
-        tree-sitter
-        nodejs
-        # Language Servers
-        # Bash
-        nodePackages.bash-language-server
-        # Dart
-        dart
-        # Elixir
-        beam.packages.erlang.elixir-ls
-        # Erlang
-        beam.packages.erlang.erlang-ls
-        # Haskell
-        pkgs.haskellPackages.haskell-language-server
-        # Java
-        java-language-server
-        # Kotlin
-        kotlin-language-server
-        # Lua
-        lua-language-server
-        # Nix
-        nil
-        nixpkgs-fmt
-        statix
-        # Python
-        pyright
-        python-debug
-        black
-        # Typescript
-        nodePackages.typescript-language-server
-        # Web (ESLint, HTML, CSS, JSON)
-        nodePackages.vscode-langservers-extracted
-        # Telescope tools
-        ripgrep
-        fd
-      ];
+      # Commenting
+      {
+        plugin = comment-nvim;
+        config = toLua "require(\"Comment\").setup()";
+      }
+      # Highlight selected symbol
+      vim-illuminate
 
-      extraConfig = ''
-        let g:elixir_ls_home = "${pkgs.beam.packages.erlang.elixir-ls}"
-        let g:python_debug_home = "${python-debug}"
-        :luafile ~/.config/nvim/lua/init.lua
-      '';
-    };
+      # file tree
+      nvim-web-devicons
+      nvim-tree-lua
+      lualine-nvim
+      nvim-navic
+      barbecue-nvim
 
-    xdg.configFile.nvim = {
-      source = ./config;
-      recursive = true;
-    };
+      {
+        plugin = vim-easy-align;
+        config = toLua "vim.g.easy_align_ignore_groups = {}";
+      }
+      vim-table-mode
+      vim-tmux-navigator
+
+    ];
+
+    extraPackages = with pkgs; [
+      tree-sitter
+      nodejs
+
+      # Lua
+      lua-language-server
+      # Nix
+      nil
+      nixpkgs-fmt
+      statix
+      # Python
+      pyright
+      black
+      # Typescript
+      nodePackages.typescript-language-server
+      # Web (ESLint, HTML, CSS, JSON)
+      nodePackages.vscode-langservers-extracted
+
+      # Telescope tools
+      ripgrep
+      fd
+    ];
+
+    extraLuaConfig = ''
+      require "general"
+      vim.cmd [[ runtime! lua/plugin/*.lua ]]
+      vim.cmd [[ runtime! lua/ftplugin/*.lua ]]
+    '';
+  };
+
+  xdg.configFile.nvim = {
+    source = ./config;
+    recursive = true;
+  };
 }
 

@@ -5,7 +5,7 @@
 { pkgs, ... }: {
   imports = [
     # This loads ./home/neovim/default.nix - neovim configured for Haskell dev, and other things.
-    # ./home/neovim
+    ./home/neovim
     # Add more of your home-manager modules here.
     ./home/zsh.nix
     ./home/wezterm.nix
@@ -37,7 +37,7 @@
       jq
       fd
       fzf
-      neovim
+      # neovim
       emacs
       # lapce
       # meld
