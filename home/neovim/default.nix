@@ -1,9 +1,4 @@
 { config, pkgs, ... }:
-let
-  toLua = str: "lua << EOF\n${str}\nEOF\n";
-  toLuaFile' = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-  toLuaFile = file: ":luafile ${file}";
-in
 {
   programs.neovim = {
     enable = true;
@@ -53,7 +48,8 @@ in
       # Commenting
       {
         plugin = comment-nvim;
-        config = toLua "require(\"Comment\").setup()";
+        type = "lua";
+        config = "require('Comment').setup()";
       }
       # Highlight selected symbol
       vim-illuminate
@@ -67,7 +63,8 @@ in
 
       {
         plugin = vim-easy-align;
-        config = toLua "vim.g.easy_align_ignore_groups = {}";
+        type = "lua";
+        config = "vim.g.easy_align_ignore_groups = {}";
       }
       vim-table-mode
       vim-tmux-navigator
