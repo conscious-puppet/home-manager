@@ -24,9 +24,12 @@ map("n", "gf", "gF", opts)
 -- map("n", "<C-q>", ":bd<CR>", opts) -- close current buffer
 -- map("n", "<C-w>m", "<CMD>tabedit % | norm <C-o><CR>", opts) -- replicate current buffer into new tab
 map("n", "<C-w>m", "<CMD>tab split<CR>", opts) -- replicate current buffer into new tab
+
 map("n", "]q", "<CMD>cnext<CR>", opts)
 map("n", "[q", "<CMD>cprev<CR>", opts)
-map("n", "<C-q>", "<CMD>call QuickFixToggle()<CR>", opts)
+
+map("n", "]l", "<CMD>lnext<CR>", opts)
+map("n", "[l", "<CMD>lprev<CR>", opts)
 
 -- Resize with arrows
 map("n", "<C-Up>", ":resize +2<CR>", opts)
@@ -55,8 +58,6 @@ map("n", "<leader>gB", "<cmd>G blame<cr>", opts)
 -- Trouble
 local trouble_status_ok, _ = pcall(require, "trouble")
 if trouble_status_ok then
-  map("n", "<leader>ld", "<cmd>Trouble document_diagnostics<cr>", { noremap = true })
-  map("n", "<leader>lD", "<cmd>Trouble workspace_diagnostics<cr>", { noremap = true })
   map("n", "<leader>d", "<cmd>Trouble document_diagnostics<cr>", { noremap = true })
   map("n", "<leader>D", "<cmd>Trouble workspace_diagnostics<cr>", { noremap = true })
 end

@@ -39,8 +39,9 @@ M.telescope_picker_mapping = function()
   map("n", "<leader>sc", telescope.registers, opts)
   map("n", "<leader>sk", telescope.keymaps, opts)
   map("n", "<leader>sc", telescope.commands, opts)
-  map("n", "<leader>ls", telescope.lsp_document_symbols, opts)
-  map("n", "<leader>lR", telescope.lsp_references, opts)
+  -- <leader>l is used by loc-list
+  -- map("n", "<leader>ls", telescope.lsp_document_symbols, opts) 
+  -- map("n", "<leader>lR", telescope.lsp_references, opts)
   -- map("n", "<leader>lD", telescope.diagnostics, opts)
   map("n", "<leader>j", telescope.jumplist, opts)
 end
@@ -64,8 +65,10 @@ M.telescope_mappings = {
     ["<PageDown>"] = actions.results_scrolling_down,
     ["<Tab>"]      = actions.toggle_selection + actions.move_selection_worse,
     ["<S-Tab>"]    = actions.toggle_selection + actions.move_selection_better,
-    ["<C-q>"]      = actions.send_to_qflist + actions.open_qflist,
-    ["<M-q>"]      = actions.send_selected_to_qflist + actions.open_qflist,
+    -- ["<C-q>"]      = actions.send_to_qflist + actions.open_qflist,
+    -- ["<M-q>"]      = actions.send_selected_to_qflist + actions.open_qflist,
+    ["<C-q>"]      = actions.send_to_loclist + actions.open_loclist,
+    ["<M-q>"]      = actions.send_selected_to_loclist + actions.open_loclist,
     ["<C-_>"]      = actions.which_key, -- keys from pressing <C-/>
     -- ["<C-n>"] = actions.cycle_history_next,
     -- ["<C-p>"] = actions.cycle_history_prev,
@@ -82,8 +85,10 @@ M.telescope_mappings = {
     ["<C-t>"]      = actions.select_tab,
     ["<Tab>"]      = actions.toggle_selection + actions.move_selection_worse,
     ["<S-Tab>"]    = actions.toggle_selection + actions.move_selection_better,
-    ["<C-q>"]      = actions.send_to_qflist + actions.open_qflist,
-    ["<M-q>"]      = actions.send_selected_to_qflist + actions.open_qflist,
+    -- ["<C-q>"]      = actions.send_to_qflist + actions.open_qflist,
+    -- ["<M-q>"]      = actions.send_selected_to_qflist + actions.open_qflist,
+    ["<C-q>"]      = actions.send_to_loclist + actions.open_loclist,
+    ["<M-q>"]      = actions.send_selected_to_loclist + actions.open_loclist,
     ["j"]          = actions.move_selection_next,
     ["k"]          = actions.move_selection_previous,
     ["<C-l>"]      = actions.cycle_history_next,

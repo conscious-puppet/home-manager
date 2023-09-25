@@ -16,11 +16,10 @@ if status_ok then
     map("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", opts)
 
     if client.supports_method "textDocument/formatting" then
-      map({ "n", "v" }, "<leader>lf", vim.lsp.buf.format, opts)
       map({ "n", "v" }, "Q", vim.lsp.buf.format, opts)
     end
 
-    map("n", "<leader>lh", vim.lsp.buf.signature_help, opts)
+    -- map("n", "<leader>lh", vim.lsp.buf.signature_help, opts)
     map("n", "<leader>r", vim.lsp.buf.rename, opts)
     -- map("n", "gr", "<cmd>Lspsaga rename<CR>", opts)
     -- map("n", "gr", "<cmd>Lspsaga rename ++project<CR>", opts)
@@ -74,12 +73,12 @@ else
     -- print(vim.inspect(client))
 
     if client.supports_method "textDocument/formatting" then
-      map({ "n", "v" }, "<leader>lf", vim.lsp.buf.format, opts)
       map({ "n", "v" }, "Q", vim.lsp.buf.format, opts)
     end
 
-    map("n", "<leader>lh", vim.lsp.buf.signature_help, opts)
-    map("n", "<leader>lr", vim.lsp.buf.rename, opts)
+  -- <leader>l is used by loc-list
+    -- map("n", "<leader>lh", vim.lsp.buf.signature_help, opts)
+    -- map("n", "<leader>lr", vim.lsp.buf.rename, opts)
     map("n", "<leader>r", vim.lsp.buf.rename, opts)
     map("n", "gd", vim.lsp.buf.definition, opts)
     map("n", "gD", vim.lsp.buf.declaration, opts)

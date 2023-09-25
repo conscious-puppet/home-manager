@@ -48,6 +48,16 @@ vim.cmd [[
   endfunction
 ]]
 
+vim.cmd [[
+  function! LocListToggle()
+    if empty(filter(getwininfo(), 'v:val.loclist'))
+      lopen
+    else
+      lclose
+    endif
+  endfunction
+]]
+
 
 vim.cmd [[
 	:command -nargs=1 Bufname keepalt file <args>
