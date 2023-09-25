@@ -34,6 +34,7 @@ in
       # git
       vim-fugitive
       diffview-nvim
+
       gitsigns-nvim
       vim-merginal
 
@@ -102,8 +103,6 @@ in
 
     extraLuaConfig = ''
       require "general"
-      vim.cmd [[ runtime! lua/plugin/*.lua ]]
-      vim.cmd [[ runtime! lua/ftplugin/*.lua ]]
     '';
   };
 

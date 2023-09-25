@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     -- end
     --   , { buffer = true, noremap = true })
 
-    local hindent_dirs = { "work", "book%-store%-spanner%-db" }
+    local hindent_dirs = { "work" }
     for _, dir in ipairs(hindent_dirs) do
       if string.find(vim.api.nvim_buf_get_name(0), dir) then
         local disable_formatting = vim.g.disable_formatting

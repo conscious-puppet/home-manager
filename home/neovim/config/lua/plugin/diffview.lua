@@ -3,7 +3,7 @@ local status_ok, diffview = pcall(require, "diffview")
 if not status_ok then
   return
 end
--- Lua
+
 local actions = require("diffview.actions")
 local lazy = require("diffview.lazy")
 local StandardView = lazy.access("diffview.scene.views.standard.standard_view", "StandardView") ---@type StandardView|LazyModule
@@ -11,97 +11,97 @@ local lib = lazy.require("diffview.lib")
 local git = lazy.require("diffview.git.utils")
 local api = vim.api
 
-local function git_prev_jump()
-  local view = lib.get_current_view()
-
-  if view and view:instanceof(StandardView.__get()) then
-    local main = view.cur_layout:get_main_win()
-    local curfile = main.file
-
-    if main:is_valid() and curfile:is_valid() then
-      local conflicts, _, cur_idx = git.parse_conflicts(
-        api.nvim_buf_get_lines(curfile.bufnr, 0, -1, false),
-        main.id
-      )
-
-      if #conflicts > 0 then
-        local prev_idx = (math.max(cur_idx, 1) - 2) % #conflicts + 1
-        local prev_conflict = conflicts[prev_idx]
-        local curwin = api.nvim_get_current_win()
-
-        api.nvim_win_call(main.id, function()
-          api.nvim_win_set_cursor(main.id, { prev_conflict.first, 0 })
-          if curwin ~= main.id then view.cur_layout:sync_scroll() end
-        end)
-
-        api.nvim_echo({ { ("Conflict [%d/%d]"):format(prev_idx, #conflicts) } }, false, {})
-      else
-        local max = -1
-        local target
-
-        for _, win in ipairs(view.cur_layout.windows) do
-          local c = api.nvim_buf_line_count(api.nvim_win_get_buf(win.id))
-          if c > max then
-            max = c
-            target = win.id
-          end
-        end
-
-        if target then
-          api.nvim_win_call(target, function()
-            vim.cmd [[norm! [c]]
-          end)
-        end
-      end
-    end
-  end
-end
-
-local function git_next_jump()
-  local view = lib.get_current_view()
-
-  if view and view:instanceof(StandardView.__get()) then
-    local main = view.cur_layout:get_main_win()
-    local curfile = main.file
-
-    if main:is_valid() and curfile:is_valid() then
-      local conflicts, _, cur_idx = git.parse_conflicts(
-        api.nvim_buf_get_lines(curfile.bufnr, 0, -1, false),
-        main.id
-      )
-
-      if #conflicts > 0 then
-        local next_idx = math.min(cur_idx, #conflicts) % #conflicts + 1
-        local next_conflict = conflicts[next_idx]
-        local curwin = api.nvim_get_current_win()
-
-        api.nvim_win_call(main.id, function()
-          api.nvim_win_set_cursor(main.id, { next_conflict.first, 0 })
-          if curwin ~= main.id then view.cur_layout:sync_scroll() end
-        end)
-
-        api.nvim_echo({ { ("Conflict [%d/%d]"):format(next_idx, #conflicts) } }, false, {})
-      else
-        local max = -1
-        local target
-
-        for _, win in ipairs(view.cur_layout.windows) do
-          local c = api.nvim_buf_line_count(api.nvim_win_get_buf(win.id))
-          if c > max then
-            max = c
-            target = win.id
-          end
-        end
-
-        if target then
-          api.nvim_win_call(target, function()
-            vim.cmd [[norm! ]c]]
-          end)
-        end
-      end
-    end
-  end
-end
+-- local function git_prev_jump()
+--   local view = lib.get_current_view()
+--
+--   if view and view:instanceof(StandardView.__get()) then
+--     local main = view.cur_layout:get_main_win()
+--     local curfile = main.file
+--
+--     if main:is_valid() and curfile:is_valid() then
+--       local conflicts, _, cur_idx = git.parse_conflicts(
+--         api.nvim_buf_get_lines(curfile.bufnr, 0, -1, false),
+--         main.id
+--       )
+--
+--       if #conflicts > 0 then
+--         local prev_idx = (math.max(cur_idx, 1) - 2) % #conflicts + 1
+--         local prev_conflict = conflicts[prev_idx]
+--         local curwin = api.nvim_get_current_win()
+--
+--         api.nvim_win_call(main.id, function()
+--           api.nvim_win_set_cursor(main.id, { prev_conflict.first, 0 })
+--           if curwin ~= main.id then view.cur_layout:sync_scroll() end
+--         end)
+--
+--         api.nvim_echo({ { ("Conflict [%d/%d]"):format(prev_idx, #conflicts) } }, false, {})
+--       else
+--         local max = -1
+--         local target
+--
+--         for _, win in ipairs(view.cur_layout.windows) do
+--           local c = api.nvim_buf_line_count(api.nvim_win_get_buf(win.id))
+--           if c > max then
+--             max = c
+--             target = win.id
+--           end
+--         end
+--
+--         if target then
+--           api.nvim_win_call(target, function()
+--             vim.cmd [[norm! [c]]
+--           end)
+--         end
+--       end
+--     end
+--   end
+-- end
+--
+-- local function git_next_jump()
+--   local view = lib.get_current_view()
+--
+--   if view and view:instanceof(StandardView.__get()) then
+--     local main = view.cur_layout:get_main_win()
+--     local curfile = main.file
+--
+--     if main:is_valid() and curfile:is_valid() then
+--       local conflicts, _, cur_idx = git.parse_conflicts(
+--         api.nvim_buf_get_lines(curfile.bufnr, 0, -1, false),
+--         main.id
+--       )
+--
+--       if #conflicts > 0 then
+--         local next_idx = math.min(cur_idx, #conflicts) % #conflicts + 1
+--         local next_conflict = conflicts[next_idx]
+--         local curwin = api.nvim_get_current_win()
+--
+--         api.nvim_win_call(main.id, function()
+--           api.nvim_win_set_cursor(main.id, { next_conflict.first, 0 })
+--           if curwin ~= main.id then view.cur_layout:sync_scroll() end
+--         end)
+--
+--         api.nvim_echo({ { ("Conflict [%d/%d]"):format(next_idx, #conflicts) } }, false, {})
+--       else
+--         local max = -1
+--         local target
+--
+--         for _, win in ipairs(view.cur_layout.windows) do
+--           local c = api.nvim_buf_line_count(api.nvim_win_get_buf(win.id))
+--           if c > max then
+--             max = c
+--             target = win.id
+--           end
+--         end
+--
+--         if target then
+--           api.nvim_win_call(target, function()
+--             vim.cmd [[norm! ]c]]
+--           end)
+--         end
+--       end
+--     end
+--   end
+-- end
 
 diffview.setup({
   diff_binaries = false,
@@ -155,8 +155,8 @@ diffview.setup({
       ["]c"]         = "]c",
       ["[x"]         = actions.prev_conflict,
       ["]x"]         = actions.next_conflict,
-      ["[["]         = function() git_prev_jump() end,
-      ["]]"]         = function() git_next_jump() end,
+      -- ["[["]         = function() git_prev_jump() end,
+      -- ["]]"]         = function() git_next_jump() end,
       ["q"]          = actions.close
     },
     diff1 = {
@@ -203,10 +203,10 @@ diffview.setup({
       ["<leader>ff"]    = actions.focus_files,
       ["<leader>ft"]    = actions.toggle_files,
       ["g<C-x>"]        = actions.cycle_layout,
-      ["N"]             = function() git_prev_jump() end,
-      ["n"]             = function() git_next_jump() end,
-      ["[["]            = function() git_prev_jump() end,
-      ["]]"]            = function() git_next_jump() end,
+      -- ["N"]             = function() git_prev_jump() end,
+      -- ["n"]             = function() git_next_jump() end,
+      -- ["[["]            = function() git_prev_jump() end,
+      -- ["]]"]            = function() git_next_jump() end,
       ["q"]             = "<cmd>DiffviewClose<cr>",
       ["c"]             = "<cmd>Git commit<cr>",
       ["p"]             = "<cmd>Git! pull<cr>",
