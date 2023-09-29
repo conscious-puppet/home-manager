@@ -57,6 +57,12 @@
       # file tree
       nvim-web-devicons
       nvim-tree-lua
+      {
+        plugin = oil-nvim;
+        type = "lua";
+        config = "require('oil').setup()";
+      }
+
       lualine-nvim
       nvim-navic
       barbecue-nvim

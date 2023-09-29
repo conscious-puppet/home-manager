@@ -31,6 +31,7 @@
       lazygit # Better git UI
       tmate
       fzf
+      fd # need for fzf
       emacs
       # lapce
       # meld
