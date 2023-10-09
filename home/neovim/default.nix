@@ -74,6 +74,11 @@
       }
       vim-table-mode
       vim-tmux-navigator
+      {
+        plugin = mkdnflow-nvim;
+        type = "lua";
+        config = "require('mkdnflow').setup()";
+      }
 
     ];
 
@@ -102,6 +107,9 @@
       # Telescope tools
       ripgrep
       fd
+
+      # for mkdnflow-nvim
+      luajitPackages.luautf8
     ];
 
     extraLuaConfig = ''

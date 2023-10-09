@@ -35,7 +35,6 @@
       emacs
       # lapce
       # meld
-      # raycast
       graphviz
       watch
       gnuplot
