@@ -443,6 +443,22 @@
         "type": "github"
       }
     },
+    "nvim-calltree": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1687780185,
+        "narHash": "sha256-RMfT/kCUTgP8qAdOola8C5iXp+9JFYRZdxQIkImZsZ8=",
+        "owner": "conscious-puppet",
+        "repo": "calltree.nvim",
+        "rev": "84825a06d2bb38870c727736d3e139c7198ebb4b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "conscious-puppet",
+        "repo": "calltree.nvim",
+        "type": "github"
+      }
+    },
     "ob-racket": {
       "flake": false,
       "locked": {
@@ -546,7 +562,8 @@
         "home-manager": "home-manager",
         "nix-doom-emacs": "nix-doom-emacs",
         "nixos-flake": "nixos-flake",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_3",
+        "nvim-calltree": "nvim-calltree"
       }
     },
     "rotate-text": {

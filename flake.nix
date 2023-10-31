@@ -11,6 +11,9 @@
     # Emacs
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+
+    nvim-calltree.url = "github:conscious-puppet/calltree.nvim";
+    nvim-calltree.flake = false;
   };
 
   outputs = inputs@{ self, ... }:
@@ -34,7 +37,19 @@
 
       perSystem = { self', pkgs, system, ... }:
         {
-          _module.args.pkgs = import inputs.nixpkgs { inherit system; config.allowUnfree = true; };
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system; config.allowUnfree = true;
+            overlays = [
+              (final: prev: {
+                vimPlugins = prev.vimPlugins // {
+                  nvim-calltree = prev.vimUtils.buildVimPlugin {
+                    name = "calltree";
+                    src = inputs.nvim-calltree;
+                  };
+                };
+              })
+            ];
+          };
           legacyPackages.homeConfigurations.abhisheksingh =
             self.nixos-flake.lib.mkHomeConfiguration
               pkgs
@@ -67,6 +82,9 @@
 
           # Enables 'nix run' to activate.
           apps.default.program = self'.packages.activate-home;
+          devShells.default = pkgs.mkShell {
+            buildInputs = with pkgs; [ neovim ];
+          };
 
           # Enable 'nix build' to build the home configuration, but without
           # activating.

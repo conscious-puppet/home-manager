@@ -40,6 +40,11 @@
       rust-tools-nvim
       # Diagnostics window
       trouble-nvim
+      {
+        plugin = nvim-calltree;
+        type = "lua";
+        config = "require('calltree').setup()";
+      }
 
       # Syntax highlighting
       nvim-treesitter.withAllGrammars
@@ -79,7 +84,6 @@
         type = "lua";
         config = "require('mkdnflow').setup()";
       }
-
     ];
 
     extraPackages = with pkgs; [

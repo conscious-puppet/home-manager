@@ -2,7 +2,7 @@
 # $HOME.
 #
 # https://nix-community.github.io/home-manager/index.html#sec-usage-configuration
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports = [
     # This loads ./home/neovim/default.nix - neovim configured for Haskell dev, and other things.
     ./home/neovim
