@@ -15,6 +15,7 @@
     extraConfig = ''
       set -g default-terminal "xterm-256color"
       set-option -ga terminal-overrides ",xterm-256color:Tc"
+      set -g allow-passthrough on
 
       set -g status-style bg=default
       set -g status-left-length 25

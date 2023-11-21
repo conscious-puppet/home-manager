@@ -38,6 +38,7 @@
       nvim-lspconfig
       nvim-lsp-ts-utils
       rust-tools-nvim
+      nvim-jdtls
       # Diagnostics window
       trouble-nvim
       {
@@ -114,9 +115,16 @@
 
       # for mkdnflow-nvim
       luajitPackages.luautf8
+
+      # java language server
+      jdt-language-server
+      lombok
     ];
 
     extraLuaConfig = ''
+      vim.g.jdt_language_server = "${pkgs.jdt-language-server}/bin/jdt-language-server"
+      vim.g.lombok_jar = "${pkgs.lombok}/share/java/lombok.jar"
+
       require "general"
     '';
   };

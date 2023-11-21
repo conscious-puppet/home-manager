@@ -21,6 +21,8 @@
       linuxPackages = if pkgs.system == "aarch64-linux" || pkgs.system == "x86_64-linux" then with pkgs; [ ] else [ ];
     in
     with pkgs; [
+      lite-xl
+      neovide
       rustup
       qemu
       lldb

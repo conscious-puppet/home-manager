@@ -30,6 +30,10 @@
       compinit
       _comp_options+=(globdots)               # Include hidden files.
 
+      ec() {
+        emacsclient -s $TMPDIR/emacs502/emacs-$1 "$@"
+      }
+
       killport() {
           kill -9 $(lsof -ti:$1)
       }

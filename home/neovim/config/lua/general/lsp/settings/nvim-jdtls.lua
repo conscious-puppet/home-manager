@@ -3,8 +3,8 @@ if not status then
   return
 end
 
-local on_attach = require("abshekh.lsp.handlers").on_attach
-local capabilities = require("abshekh.lsp.handlers").capabilities
+local on_attach = require("general.lsp.handlers").on_attach
+local capabilities = require("general.lsp.handlers").capabilities
 
 -- (after! java-mode
 --   (setq lsp-java-format-settings-url "http://google.github.io/styleguide/eclipse-java-google-style.xml")
@@ -13,6 +13,7 @@ local capabilities = require("abshekh.lsp.handlers").capabilities
 
 -- Determine OS
 local home = os.getenv("HOME")
+vim.fn.setenv("JAVA_OPTS", "-javaagent:" .. vim.g.lombok_jar)
 
 WORKSPACE_PATH = home .. "/.cache/jdtls-workspace/"
 
@@ -33,7 +34,7 @@ local workspace_dir = WORKSPACE_PATH .. project_name
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
-  cmd = {"jdt-language-server", "-data", workspace_dir},
+  cmd = { vim.g.jdt_language_server, "-data", workspace_dir },
   capabilities = capabilities,
   root_dir = root_dir,
 
@@ -122,7 +123,7 @@ local config = {
     -- bundles = bundles,
   },
   handlers = {
-    ['language/status'] = function() end,         -- disable language status in command line
+    ['language/status'] = function() end, -- disable language status in command line
     -- ['language/progressReport'] = function() end, -- disable language status in command line
     -- ["$/progress"] = function() end,              -- disable language status in command line
   },
@@ -151,17 +152,17 @@ config["on_attach"] = function(client, bufnr)
   map("v", "<leader>Cm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", "Extract Method")
 end
 
--- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
---   pattern = { "*.java" },
---   callback = function()
---     local _, _ = pcall(vim.lsp.codelens.refresh)
---   end,
--- })
-
--- This starts a new client & server,
--- or attaches to an existing client & server depending on the `root_dir`.
+-- -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+-- --   pattern = { "*.java" },
+-- --   callback = function()
+-- --     local _, _ = pcall(vim.lsp.codelens.refresh)
+-- --   end,
+-- -- })
+--
+-- -- This starts a new client & server,
+-- -- or attaches to an existing client & server depending on the `root_dir`.
 -- jdtls.start_or_attach(config)
-
+--
 -- vim.cmd(
 --   [[command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)]]
 -- )
@@ -172,4 +173,3 @@ end
 -- -- vim.cmd "command! -buffer JdtJshell lua require('jdtls').jshell()"
 
 return config
-
