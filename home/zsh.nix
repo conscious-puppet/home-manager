@@ -30,6 +30,13 @@
       compinit
       _comp_options+=(globdots)               # Include hidden files.
 
+      # ssh-add id_rsa
+      # ssh() {
+      #  eval ssh-agent zsh;
+      #  ssh $@
+      #  # exit;
+      # }
+
       ec() {
         emacsclient -s $TMPDIR/emacs502/emacs-$1 "$@"
       }
@@ -169,6 +176,22 @@
       }
 
       [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
+      if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
+          rm -rf ~/.ssh/ssh-agent.sock
+          eval $(ssh-agent -a ~/.ssh/ssh-agent.sock) > /dev/null
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh/auth_sock_info
+          # echo "export SSH_AGENT_PID=$SSH_AGENT_PID" >> ~/.ssh/auth_sock_info
+          if [ "$(ssh-add -l)" = "The agent has no identities." ] ; then
+              # Auto-add ssh keys to your ssh agent
+              ssh-add ~/.ssh/id_rsa > /dev/null 2>&1
+          fi
+      else
+        . ~/.ssh/auth_sock_info
+        if [ "$(ssh-add -l)" = "The agent has no identities." ] ; then
+            # Auto-add ssh keys to your ssh agent
+            ssh-add ~/.ssh/id_rsa > /dev/null 2>&1
+        fi
+      fi
     '';
     envExtra = ''
       PATH="/usr/local/sbin:$PATH"

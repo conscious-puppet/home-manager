@@ -23,7 +23,7 @@ local map = vim.keymap.set
 -- end
 --   , { buffer = true, noremap = true })
 
-local hindent_dirs = { "work" }
+local hindent_dirs = { "newton" }
 for _, dir in ipairs(hindent_dirs) do
   if string.find(vim.api.nvim_buf_get_name(0), dir) then
     local disable_formatting = vim.g.disable_formatting

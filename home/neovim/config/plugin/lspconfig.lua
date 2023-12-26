@@ -15,7 +15,10 @@ local lua_opts = vim.tbl_deep_extend("force",
   opts)
 lspconfig.lua_ls.setup(lua_opts)
 
-lspconfig.hls.setup(opts)
+local hls_opts = vim.tbl_deep_extend("force",
+  require("general.lsp.settings.hls"),
+  opts)
+lspconfig.hls.setup(hls_opts)
 
 --   lspconfig.zls.setup(opts)
 

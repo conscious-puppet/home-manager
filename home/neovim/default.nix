@@ -80,11 +80,11 @@
       }
       vim-table-mode
       vim-tmux-navigator
-      {
-        plugin = mkdnflow-nvim;
-        type = "lua";
-        config = "require('mkdnflow').setup()";
-      }
+      # {
+      #   plugin = mkdnflow-nvim;
+      #   type = "lua";
+      #   config = "require('mkdnflow').setup()";
+      # }
     ];
 
     extraPackages = with pkgs; [
