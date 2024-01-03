@@ -13,7 +13,10 @@ local capabilities = require("general.lsp.handlers").capabilities
 
 -- Determine OS
 local home = os.getenv("HOME")
-vim.fn.setenv("JAVA_OPTS", "-javaagent:" .. vim.g.lombok_jar)
+local jdt_language_server = os.getenv("NVIM_JDT_LANGUAGE_SERVER")
+local lombok_jar = os.getenv("NVIM_LOMBOK_JAR")
+
+vim.fn.setenv("JAVA_OPTS", "-javaagent:" .. lombok_jar)
 
 WORKSPACE_PATH = home .. "/.cache/jdtls-workspace/"
 
@@ -34,7 +37,7 @@ local workspace_dir = WORKSPACE_PATH .. project_name
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
-  cmd = { vim.g.jdt_language_server, "-data", workspace_dir },
+  cmd = { jdt_language_server, "-data", workspace_dir },
   capabilities = capabilities,
   root_dir = root_dir,
 

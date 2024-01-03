@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ self, inputs, config, pkgs, lib, ... }:
 {
   programs.neovim = {
     enable = true;
@@ -41,43 +41,28 @@
       nvim-jdtls
       # Diagnostics window
       trouble-nvim
-      {
-        plugin = nvim-calltree;
-        type = "lua";
-        config = "require('calltree').setup()";
-      }
+      nvim-calltree
 
       # Syntax highlighting
       nvim-treesitter.withAllGrammars
       nvim-ts-context-commentstring
 
       # Commenting
-      {
-        plugin = comment-nvim;
-        type = "lua";
-        config = "require('Comment').setup()";
-      }
+      comment-nvim
       # Highlight selected symbol
       vim-illuminate
 
       # file tree
       nvim-web-devicons
       nvim-tree-lua
-      {
-        plugin = oil-nvim;
-        type = "lua";
-        config = "require('oil').setup()";
-      }
+      oil-nvim
 
       lualine-nvim
       nvim-navic
       barbecue-nvim
 
-      {
-        plugin = vim-easy-align;
-        type = "lua";
-        config = "vim.g.easy_align_ignore_groups = {}";
-      }
+      vim-easy-align
+
       vim-table-mode
       vim-tmux-navigator
       # {
@@ -121,17 +106,12 @@
       lombok
     ];
 
-    extraLuaConfig = ''
-      vim.g.jdt_language_server = "${pkgs.jdt-language-server}/bin/jdt-language-server"
-      vim.g.lombok_jar = "${pkgs.lombok}/share/java/lombok.jar"
-
-      require "general"
-    '';
   };
 
-  xdg.configFile.nvim = {
-    source = ./config;
-    recursive = true;
-  };
+  home.sessionVariables.NVIM_JDT_LANGUAGE_SERVER = "${pkgs.jdt-language-server}/bin/jdt-language-server";
+  home.sessionVariables.NVIM_LOMBOK_JAR = "${pkgs.lombok}/share/java/lombok.jar";
+
+  home.file."./.config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/neovim/config";
+  # home.file."./.config/nvim".source = config.lib.file.mkOutOfStoreSymlink ./config;
 }
 
