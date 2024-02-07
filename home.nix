@@ -4,9 +4,8 @@
 # https://nix-community.github.io/home-manager/index.html#sec-usage-configuration
 { pkgs, inputs, ... }: {
   imports = [
-    # This loads ./home/neovim/default.nix - neovim configured for Haskell dev, and other things.
     ./home/neovim
-    # Add more of your home-manager modules here.
+    ./home/vscode
     ./home/zsh.nix
     ./home/wezterm.nix
     ./home/tmux.nix
@@ -31,6 +30,7 @@
       nix-info
       cachix
       lazygit # Better git UI
+      git-lfs # Git extension for versioning large files
       tmate
       fzf
       fd # need for fzf
@@ -40,9 +40,11 @@
       graphviz
       watch
       gnuplot
-      toipe
+      toipe # terminal typing
       ngrok
       mdcat # cat for markdown
+      slides # markdown presentation tool
+      tetex # latex tools
     ] ++ darwinPackages ++ linuxPackages;
 
   # Programs natively supported by home-manager.

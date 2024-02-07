@@ -46,6 +46,7 @@
       # Syntax highlighting
       nvim-treesitter.withAllGrammars
       nvim-ts-context-commentstring
+      vim-just # just file support, mostly for syntax highlighting
 
       # Commenting
       comment-nvim
@@ -65,11 +66,6 @@
 
       vim-table-mode
       vim-tmux-navigator
-      # {
-      #   plugin = mkdnflow-nvim;
-      #   type = "lua";
-      #   config = "require('mkdnflow').setup()";
-      # }
     ];
 
     extraPackages = with pkgs; [
