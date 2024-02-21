@@ -45,6 +45,7 @@
       mdcat # cat for markdown
       slides # markdown presentation tool
       # tetex # latex tools, failing with the new repo
+      tailscale
     ] ++ darwinPackages ++ linuxPackages;
 
   nix.gc.automatic = true;
