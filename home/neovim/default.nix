@@ -66,6 +66,9 @@
 
       vim-table-mode
       vim-tmux-navigator
+
+      # ui
+      neophyte-nvim
     ];
 
     extraPackages = with pkgs; [

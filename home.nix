@@ -44,8 +44,10 @@
       ngrok
       mdcat # cat for markdown
       slides # markdown presentation tool
-      tetex # latex tools
+      # tetex # latex tools, failing with the new repo
     ] ++ darwinPackages ++ linuxPackages;
+
+  nix.gc.automatic = true;
 
   # Programs natively supported by home-manager.
   programs = {

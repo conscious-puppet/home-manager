@@ -14,6 +14,9 @@
 
     nvim-calltree.url = "github:conscious-puppet/calltree.nvim";
     nvim-calltree.flake = false;
+
+    neophyte-nvim.url = "github:tim-harding/neophyte";
+    neophyte-nvim.flake = false;
   };
 
   outputs = inputs@{ self, ... }:
@@ -45,6 +48,10 @@
                   nvim-calltree = prev.vimUtils.buildVimPlugin {
                     name = "calltree";
                     src = inputs.nvim-calltree;
+                  };
+                  neophyte-nvim = prev.vimUtils.buildVimPlugin {
+                    name = "neophyte";
+                    src = inputs.neophyte-nvim;
                   };
                 };
               })
