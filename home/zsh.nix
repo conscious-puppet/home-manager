@@ -7,7 +7,7 @@
       vim = "nvim";
       # doom = "$HOME/.config/emacs/bin/doom";
       doom = "$HOME/.emacs.d/bin/doom";
-      emacs = "emacs -nw";
+      # emacs = "emacs -nw";
       ls = "ls --color=auto";
       ll = "ls -A";
       la = "ls -lA";
@@ -37,9 +37,9 @@
       #  # exit;
       # }
 
-      ec() {
-        emacsclient -s $TMPDIR/emacs502/emacs-$1 "$@"
-      }
+      # ec() {
+      #   emacsclient -s $TMPDIR/emacs502/emacs-$1 "$@"
+      # }
 
       killport() {
           kill -9 $(lsof -ti:$1)
@@ -86,6 +86,11 @@
       }
 
       alias t="tmux -u attach || tmux -u new"
+
+      nix-store-delete() {
+        nix-store -q --referrers-closure $1 | xargs nix-store --option keep-outputs false --option keep-derivations false --delete
+      }
+
       p() {
         local dir
         local pdir=$(pwd)

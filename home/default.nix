@@ -4,11 +4,12 @@
 # https://nix-community.github.io/home-manager/index.html#sec-usage-configuration
 { pkgs, inputs, ... }: {
   imports = [
-    ./home/neovim
-    ./home/vscode
-    ./home/zsh.nix
-    ./home/wezterm.nix
-    ./home/tmux.nix
+    ./neovim
+    ./vscode
+    ./emacs
+    ./zsh.nix
+    ./wezterm.nix
+    ./tmux.nix
   ];
 
   # Nix packages to install to $HOME
@@ -20,6 +21,10 @@
       linuxPackages = if pkgs.system == "aarch64-linux" || pkgs.system == "x86_64-linux" then with pkgs; [ ] else [ ];
     in
     with pkgs; [
+      # fonts
+      iosevka
+      (nerdfonts.override { fonts = [ "Iosevka" ]; })
+
       lite-xl
       neovide
       rustup
@@ -34,7 +39,6 @@
       tmate
       fzf
       fd # need for fzf
-      emacs
       # lapce
       # meld
       graphviz
@@ -45,10 +49,13 @@
       mdcat # cat for markdown
       slides # markdown presentation tool
       # tetex # latex tools, failing with the new repo
-      tailscale
+      tailscale # similar to ngrok
     ] ++ darwinPackages ++ linuxPackages;
 
   nix.gc.automatic = true;
+
+  # required to autoload fonts from packages installed via Home Manager
+  fonts.fontconfig.enable = true;
 
   # Programs natively supported by home-manager.
   programs = {

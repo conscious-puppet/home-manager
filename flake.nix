@@ -26,7 +26,7 @@
         inputs.nixos-flake.flakeModule
       ];
 
-      flake.homeModules.default = ./home.nix;
+      flake.homeModules.default = ./home;
 
       flake.templates.default = {
         description = "A `home-manager` template providing useful tools & settings for Nix-based development";
