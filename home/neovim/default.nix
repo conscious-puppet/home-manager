@@ -39,14 +39,17 @@
       nvim-lsp-ts-utils
       rust-tools-nvim
       nvim-jdtls
+
       # Diagnostics window
       trouble-nvim
       nvim-calltree
+      conform-nvim
 
       # Syntax highlighting
       nvim-treesitter.withAllGrammars
       nvim-ts-context-commentstring
       vim-just # just file support, mostly for syntax highlighting
+      Jenkinsfile-vim-syntax
 
       # Commenting
       comment-nvim

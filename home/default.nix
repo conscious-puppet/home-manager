@@ -50,6 +50,8 @@
       slides # markdown presentation tool
       # tetex # latex tools, failing with the new repo
       tailscale # similar to ngrok
+      ncdu # Disk usage analyzer
+      nix
     ] ++ darwinPackages ++ linuxPackages;
 
   nix.gc.automatic = true;
@@ -64,7 +66,7 @@
       enable = true;
       initExtra = ''
         # Make Nix and home-manager installed things available in PATH.
-        export PATH=/run/current-system/sw/bin/:/nix/var/nix/profiles/default/bin:$HOME/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:$PATH
+        export PATH=$HOME/.nix-profile/bin:/run/current-system/sw/bin/:/nix/var/nix/profiles/default/bin:/etc/profiles/per-user/$USER/bin:$PATH
       '';
     };
 
