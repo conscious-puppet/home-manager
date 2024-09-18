@@ -22,7 +22,7 @@
       sshL = "ssh -L 127.0.0.1:5601:127.0.0.1:5601 -L 127.0.0.1:8013:127.0.0.1:8013 -L 127.0.0.1:3000:127.0.0.1:3000 -L 127.0.0.1:8081:127.0.0.1:8080";
       tmux = "tmux -u";
     };
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     initExtra = ''
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
       zstyle ':completion:*' menu select
