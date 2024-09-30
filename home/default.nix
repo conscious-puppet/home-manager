@@ -10,6 +10,7 @@
     ./zsh.nix
     ./wezterm.nix
     ./tmux.nix
+    ./helix.nix
   ];
 
   # Nix packages to install to $HOME
@@ -17,10 +18,19 @@
   # Search for packages here: https://search.nixos.org/packages
   home.packages =
     let
-      darwinPackages = if pkgs.system == "aarch64-darwin" || pkgs.system == "x86_64-darwin" then with pkgs; [ raycast ] else [ ];
-      linuxPackages = if pkgs.system == "aarch64-linux" || pkgs.system == "x86_64-linux" then with pkgs; [ ] else [ ];
+      darwinPackages =
+        if pkgs.system == "aarch64-darwin" || pkgs.system == "x86_64-darwin" then
+          with pkgs; [ raycast ]
+        else
+          [ ];
+      linuxPackages =
+        if pkgs.system == "aarch64-linux" || pkgs.system == "x86_64-linux" then
+          with pkgs; [ ]
+        else
+          [ ];
     in
-    with pkgs; [
+    with pkgs;
+    [
       # fonts
       iosevka
       (nerdfonts.override { fonts = [ "Iosevka" ]; })
@@ -52,6 +62,7 @@
       tailscale # similar to ngrok
       ncdu # Disk usage analyzer
       nix
+      obsidian # note taking app
     ] ++ darwinPackages ++ linuxPackages;
 
   nix.gc.automatic = true;
@@ -80,5 +91,4 @@
     # Type `z <pat>` to cd to some directory
     zoxide.enable = true;
   };
-
 }

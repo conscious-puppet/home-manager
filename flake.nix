@@ -2,6 +2,7 @@
   inputs = {
     # Principle inputs (updated by `nix run .#update`)
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-24-05.url = "github:nixos/nixpkgs/nixos-24.05";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -44,6 +45,7 @@
             inherit system; config.allowUnfree = true;
             overlays = [
               (final: prev: {
+                wezterm = inputs.nixpkgs-24-05.legacyPackages.${system}.wezterm;
                 vimPlugins = prev.vimPlugins // {
                   nvim-calltree = prev.vimUtils.buildVimPlugin {
                     name = "calltree";

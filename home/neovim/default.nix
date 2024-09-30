@@ -47,11 +47,11 @@
 
       # Syntax highlighting
       nvim-treesitter.withAllGrammars
-      nvim-ts-context-commentstring
       vim-just # just file support, mostly for syntax highlighting
       Jenkinsfile-vim-syntax
 
       # Commenting
+      # nvim-ts-context-commentstring
       comment-nvim
       # Highlight selected symbol
       vim-illuminate

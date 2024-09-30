@@ -4,5 +4,14 @@ if not status_ok then
   return
 end
 
-configs.setup {}
+configs.setup {
+  modules = {},
+  ensure_installed = {},
+  sync_install = false,
+  auto_install = false,
+  ignore_install = {},
+  highlight = {
+    enable = true,
+  },
+}
 

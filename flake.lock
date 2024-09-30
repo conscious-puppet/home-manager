@@ -378,6 +378,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-24-05": {
+      "locked": {
+        "lastModified": 1727540905,
+        "narHash": "sha256-40J9tW7Y794J7Uw4GwcAKlMxlX2xISBl6IBigo83ih8=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "fbca5e745367ae7632731639de5c21f29c8744ed",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-24.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-lib": {
       "locked": {
         "dir": "lib",
@@ -580,6 +596,7 @@
         "nix-doom-emacs": "nix-doom-emacs",
         "nixos-flake": "nixos-flake",
         "nixpkgs": "nixpkgs_3",
+        "nixpkgs-24-05": "nixpkgs-24-05",
         "nvim-calltree": "nvim-calltree"
       }
     },
