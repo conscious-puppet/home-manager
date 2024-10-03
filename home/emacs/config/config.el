@@ -74,12 +74,12 @@
       "w w" '(evil-window-next :wk "Goto next window"))
   )
 
-(use-package all-the-icons
-  :ensure t
-  :if (display-graphic-p))
+;; (use-package all-the-icons
+;;  :ensure t
+;;  :if (display-graphic-p))
 
-(use-package all-the-icons-dired
-  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+;; (use-package all-the-icons-dired
+;;  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
 
 (set-face-attribute 'default nil
   :font "Iosevka"
@@ -134,7 +134,13 @@
       "fu" '(sudo-edit-find-file :wk "Sudo find file")
       "fU" '(sudo-edit :wk "Sudo edit file")))
 
-(load-theme 'kanagawa t)
+(load-theme 'leuven-dark t)
+  ;; (load-theme 'kanagawa t)
+
+  ;; (defun load-theme-after-frame (_frame)
+  ;;  (enable-theme 'kanagawa))
+
+  ;; (add-hook 'after-make-frame-functions #'load-theme-after-frame)
 
 (use-package which-key
   :init
@@ -203,5 +209,5 @@
 (electric-indent-mode -1)
 
 (use-package rainbow-mode
-  :hook 
+  :hook
   ((org-mode prog-mode) . rainbow-mode))

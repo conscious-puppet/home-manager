@@ -80,9 +80,22 @@
         local dir
         dir=$(
           cd &&
-            fd -0 --type d --hidden --exclude .git --exclude node_module --exclude .cache --exclude .npm --exclude .mozilla --exclude .meteor --exclude .nv |
+            fd -0 -I --type d --hidden \
+              --exclude .git \
+              --exclude node_module \
+              --exclude .cache \
+              --exclude .npm \
+              --exclude .mozilla \
+              --exclude .meteor \
+              --exclude .nv \
+              --exclude .vscode \
+              --exclude .cargo \
+              --exclude .direnv \
+              --follow --search-path $HOME/work \
+              --search-path $HOME/.config \
+              --search-path $HOME/dev |
             fzf --read0
-        ) && cd ~/$dir
+        ) && cd $dir
       }
 
       alias t="tmux -u attach || tmux -u new"
@@ -96,9 +109,22 @@
         local pdir=$(pwd)
         dir=$(
           cd &&
-            fd -0 --type d --hidden --exclude .git --exclude node_module --exclude .cache --exclude .npm --exclude .mozilla --exclude .meteor --exclude .nv |
+            fd -0 -I --type d --hidden \
+              --exclude .git \
+              --exclude node_module \
+              --exclude .cache \
+              --exclude .npm \
+              --exclude .mozilla \
+              --exclude .meteor \
+              --exclude .nv \
+              --exclude .vscode \
+              --exclude .cargo \
+              --exclude .direnv \
+              --follow --search-path $HOME/work \
+              --search-path $HOME/.config \
+              --search-path $HOME/dev |
             fzf --read0
-        ) && cd ~/$dir
+        ) && cd $dir
         local sessionname="$(basename -- $dir)"
         tmux -u new-session -A -s $sessionname
         cd $pdir

@@ -30,7 +30,7 @@
       vterm
       vterm-toggle
 
-      kanagawa-theme
+      # kanagawa-theme
       rainbow-mode
       # todo
       # dirvish # better dired: https://github.com/alexluigit/dirvish

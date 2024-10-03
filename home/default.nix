@@ -11,6 +11,7 @@
     ./wezterm.nix
     ./tmux.nix
     ./helix.nix
+    ./zellij.nix
   ];
 
   # Nix packages to install to $HOME

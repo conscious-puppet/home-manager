@@ -132,12 +132,12 @@ Envs are generated from the nix module, and would mostly contain the nix-store p
 This is an icon set that can be used with dashboard, dired, ibuffer and other Emacs programs.
 
 #+begin_src emacs-lisp
-(use-package all-the-icons
-  :ensure t
-  :if (display-graphic-p))
+;; (use-package all-the-icons
+;;  :ensure t
+;;  :if (display-graphic-p))
 
-(use-package all-the-icons-dired
-  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+;; (use-package all-the-icons-dired
+;;  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
 #+end_src
 
 * FONTS
@@ -167,14 +167,14 @@ use ":describe-font", to list all the fonts
 
 * GRAFICAL USER INTERFACE TWEAKS
 ** Disable Menubar, Toolbars and Scrollbars
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (menu-bar-mode -1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
 #+end_src
 
 ** Display Line Numbers and Truncated Lines
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (global-display-line-numbers-mode 1)
   (global-visual-line-mode t)
 #+end_src
@@ -190,7 +190,7 @@ Vterm is a terminal emulator within Emacs.  The 'shell-file-name' setting sets t
           vterm-max-scrollback 5000))
 #+end_src
 
-** Vterm-Toggle 
+** Vterm-Toggle
 [[https://github.com/jixiuf/vterm-toggle][vterm-toggle]] toggles between the vterm buffer and whatever buffer you are editing.
 
 #+begin_src emacs-lisp
@@ -226,7 +226,13 @@ Vterm is a terminal emulator within Emacs.  The 'shell-file-name' setting sets t
 
 * THEMING
 #+begin_src emacs-lisp
-(load-theme 'kanagawa t)
+(load-theme 'leuven-dark t)
+  ;; (load-theme 'kanagawa t)
+
+  ;; (defun load-theme-after-frame (_frame)
+  ;;  (enable-theme 'kanagawa))
+
+  ;; (add-hook 'after-make-frame-functions #'load-theme-after-frame)
 #+end_src
 
 * WHICH KEY
@@ -253,7 +259,7 @@ Vterm is a terminal emulator within Emacs.  The 'shell-file-name' setting sets t
 - Ivy, a generic completion mechanism for Emacs.
 - Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
 - Ivy-rich allows us to add descriptions alongside the commands in M-x.
-  
+
 #+begin_src emacs-lisp
   (use-package counsel
     :after ivy
@@ -345,6 +351,6 @@ Display the actual color as a background for any hex color value (ex. #ffffff). 
 
 #+begin_src emacs-lisp
 (use-package rainbow-mode
-  :hook 
+  :hook
   ((org-mode prog-mode) . rainbow-mode))
 #+end_src
