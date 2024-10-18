@@ -55,6 +55,7 @@
                     name = "neophyte";
                     src = inputs.neophyte-nvim;
                   };
+                  trouble-nvim = inputs.nixpkgs-24-05.legacyPackages.${system}.vimPlugins.trouble-nvim;
                 };
               })
             ];
