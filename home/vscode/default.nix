@@ -5,7 +5,7 @@
     enable = true;
     enableUpdateCheck = true;
     enableExtensionUpdateCheck = true;
-    userSettings = import ./settings {};
+    userSettings = import ./settings { };
   };
 }
 

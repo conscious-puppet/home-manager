@@ -1,10 +1,4 @@
-# emacs cache
-**/eln-cache/*
-**/auto-save-list/*
-**/elpa/*
-**/tramp
-**/recentf
-**/envs.el
-
 # nix result
 result
+
+.direnv/

@@ -6,12 +6,13 @@
   imports = [
     ./neovim
     ./vscode
-    ./emacs
+    # ./emacs
     ./zsh.nix
     ./wezterm.nix
     ./tmux.nix
     ./helix.nix
     ./zellij.nix
+    ./emacs.nix
   ];
 
   # Nix packages to install to $HOME
@@ -67,7 +68,10 @@
       asciinema # asciinema is a suite of tools for recording, replaying, and sharing terminal sessions.
     ] ++ darwinPackages ++ linuxPackages;
 
-  nix.gc.automatic = true;
+  nix = {
+    registry.nixpkgs.flake = inputs.nixpkgs; # https://yusef.napora.org/blog/pinning-nixpkgs-flake/
+    gc.automatic = true;
+  };
 
   # required to autoload fonts from packages installed via Home Manager
   fonts.fontconfig.enable = true;
