@@ -11,8 +11,11 @@
       tmuxPlugins.sensible
       tmuxPlugins.vim-tmux-navigator
     ];
-
+    shell = "${pkgs.zsh}/bin/zsh";
     extraConfig = ''
+
+      set -g default-command "${pkgs.zsh}/bin/zsh"
+
       set -g default-terminal "xterm-256color"
       set-option -ga terminal-overrides ",xterm-256color:Tc"
       set -g allow-passthrough on

@@ -58,8 +58,8 @@ map("n", "<leader>gB", "<cmd>G blame<cr>", opts)
 -- Trouble
 local trouble_status_ok, _ = pcall(require, "trouble")
 if trouble_status_ok then
-  map("n", "<leader>d", "<cmd>Trouble document_diagnostics<cr>", { noremap = true })
-  map("n", "<leader>D", "<cmd>Trouble workspace_diagnostics<cr>", { noremap = true })
+  map("n", "<leader>d", "<cmd>Trouble diagnostics toggle filter.buf=0 <cr>", { noremap = true })
+  map("n", "<leader>D", "<cmd>Trouble diagnostics toggle<cr>", { noremap = true })
 end
 
 

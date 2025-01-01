@@ -14,6 +14,8 @@ M.set = function()
     vim.api.nvim_set_hl(0, "LspCodeLens", { fg = "#565f89" })
     vim.api.nvim_set_hl(0, "LspCodeLensSeparator", { fg = "#565f89" })
     vim.api.nvim_set_hl(0, "FloatBorder", { link = "TelescopeBorder" })
+    vim.api.nvim_set_hl(0, "TroubleNormal", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "TroubleNormalNC", { link = "NormalNC" })
 
     vim.g.border_style = "single"
   end

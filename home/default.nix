@@ -6,13 +6,12 @@
   imports = [
     ./neovim
     ./vscode
-    # ./emacs
     ./zsh.nix
     ./wezterm.nix
     ./tmux.nix
     ./helix.nix
     ./zellij.nix
-    ./emacs.nix
+    # ./emacs.nix
   ];
 
   # Nix packages to install to $HOME
@@ -66,6 +65,9 @@
       nix
       obsidian # note taking app
       asciinema # asciinema is a suite of tools for recording, replaying, and sharing terminal sessions.
+      signal-desktop # Private, simple, and secure messenger
+
+      # termpdfpy
     ] ++ darwinPackages ++ linuxPackages;
 
   nix = {
@@ -80,7 +82,7 @@
   programs = {
     # on macOS, you probably don't need this
     bash = {
-      enable = true;
+      enable = false;
       initExtra = ''
         # Make Nix and home-manager installed things available in PATH.
         export PATH=$HOME/.nix-profile/bin:/run/current-system/sw/bin/:/nix/var/nix/profiles/default/bin:/etc/profiles/per-user/$USER/bin:$PATH

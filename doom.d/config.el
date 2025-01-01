@@ -55,7 +55,9 @@
 (map! :n "[c" #'+vc-gutter/previous-hunk)
 
 
-
+;; latex
+;; https://michaelneuper.com/posts/efficient-latex-editing-with-emacs/
+(setq +latex-viewers '(pdf-tools))
 
 
 ;; load dockerfile config

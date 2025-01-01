@@ -1,7 +1,7 @@
 {
   inputs = {
-    # Principle inputs (updated by `nix run .#update`)
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-24-05.url = "github:nixos/nixpkgs/nixos-24.05";
 
     home-manager.url = "github:nix-community/home-manager";
@@ -47,7 +47,7 @@
                     name = "neophyte";
                     src = inputs.neophyte-nvim;
                   };
-                  trouble-nvim = inputs.nixpkgs-24-05.legacyPackages.${system}.vimPlugins.trouble-nvim;
+                  # trouble-nvim = inputs.nixpkgs-24-05.legacyPackages.${system}.vimPlugins.trouble-nvim;
                 };
               })
             ];

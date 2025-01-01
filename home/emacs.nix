@@ -1,12 +1,12 @@
 { pkgs, lib, ... }: {
   # https://docs.doomemacs.org/v21.12/modules/lang/org/#/prerequisites/nixos
   home.packages = [
-    pkgs.texlive.combined.scheme-medium
+    pkgs.texlive.combined.scheme-full
   ];
 
   programs.doom-emacs = {
     enable = true;
-    emacs = pkgs.emacs29-pgtk;
+    # emacs = pkgs.emacs29-pgtk;
     doomDir = ../doom.d;
     experimentalFetchTree = true; # Disable if there are fetcher issues
     extraPackages = epkgs: with epkgs; [
