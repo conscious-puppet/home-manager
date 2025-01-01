@@ -224,8 +224,7 @@
         "nixpkgs-24-05": "nixpkgs-24-05",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nvim-calltree": "nvim-calltree",
-        "treefmt-nix": "treefmt-nix",
-        "zitchdog-nvim": "zitchdog-nvim"
+        "treefmt-nix": "treefmt-nix"
       }
     },
     "systems": {
@@ -258,22 +257,6 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "zitchdog-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1735303880,
-        "narHash": "sha256-lIByQ00V5mYvQlvkqf0HE2+IAla6CpUh/iQCD1Sl6DE=",
-        "owner": "theamallalgi",
-        "repo": "zitchdog",
-        "rev": "d0c89ca586073724916e2ab95e613f5da6d6a50c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "theamallalgi",
-        "repo": "zitchdog",
         "type": "github"
       }
     }
