@@ -20,7 +20,7 @@ local hls_opts = vim.tbl_deep_extend("force",
   opts)
 lspconfig.hls.setup(hls_opts)
 
---   lspconfig.zls.setup(opts)
+lspconfig.zls.setup(opts)
 
 lspconfig.gopls.setup(opts)
 
