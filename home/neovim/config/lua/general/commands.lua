@@ -1,19 +1,19 @@
 local create_command = vim.api.nvim_create_user_command
 
 local function woman()
-  local telescope_builtin_status_ok, telescope_builtin = pcall(require, "telescope.builtin")
-  if not telescope_builtin_status_ok then
-    return
-  end
-  telescope_builtin.man_pages({ previewer = false })
+	local telescope_builtin_status_ok, telescope_builtin = pcall(require, "telescope.builtin")
+	if not telescope_builtin_status_ok then
+		return
+	end
+	telescope_builtin.man_pages({ previewer = false })
 end
 
 local function preview_notes()
-  local telescope_builtin_status_ok, telescope_builtin = pcall(require, "telescope.builtin")
-  if not telescope_builtin_status_ok then
-    return
-  end
-  telescope_builtin.find_files({ previewer = false, cwd = "~/notes/" })
+	local telescope_builtin_status_ok, telescope_builtin = pcall(require, "telescope.builtin")
+	if not telescope_builtin_status_ok then
+		return
+	end
+	telescope_builtin.find_files({ previewer = false, cwd = "~/notes/" })
 end
 
 create_command("Woman", woman, { desc = "Man Pages" })
@@ -34,11 +34,10 @@ create_command("WorkCapture", ":5sp ~/notes/work/work.md", { desc = "Write to wo
 
 create_command("WorkCapture", ":5sp ~/notes/work/work.md", { desc = "Write to work.md" })
 
-
 create_command("Bonly", ":execute '%bdelete | edit # | normal `\"' | bdelete#", { desc = "Buffer only" })
 create_command("LspClearLog", ":!cat /dev/null > ~/.local/state/nvim/lsp.log", { desc = "Clear LSP Logs" })
 
-vim.cmd [[
+vim.cmd([[
   function! QuickFixToggle()
     if empty(filter(getwininfo(), 'v:val.quickfix'))
       copen
@@ -46,9 +45,9 @@ vim.cmd [[
       cclose
     endif
   endfunction
-]]
+]])
 
-vim.cmd [[
+vim.cmd([[
   function! LocListToggle()
     if empty(filter(getwininfo(), 'v:val.loclist'))
       lopen
@@ -56,10 +55,9 @@ vim.cmd [[
       lclose
     endif
   endfunction
-]]
+]])
 
-
-vim.cmd [[
+vim.cmd([[
 	:command -nargs=1 Bufname keepalt file <args>
 	:command -nargs=1 Type set filetype <args>
 
@@ -69,9 +67,9 @@ vim.cmd [[
   endfunction
 
 	:command -nargs=1 Scratch call NewScratchTab(<f-args>)
-]]
+]])
 
-vim.cmd [[
+vim.cmd([[
   function! CopyMessages(...)
       execute printf('redir @+')
       execute printf('%smessage', a:1)
@@ -79,5 +77,4 @@ vim.cmd [[
   endfunction
 
 	:command -nargs=1 CopyMessages call CopyMessages(<f-args>)
-]]
-
+]])

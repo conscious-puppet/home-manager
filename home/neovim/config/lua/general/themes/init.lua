@@ -1,18 +1,18 @@
 local theme = require("general.themes.kanagawa")
 
 local defaults = {
-  set                = function()
-    vim.cmd.colorscheme("default")
-    vim.g.border_style = "single"
-  end,
-  colors             = "default",
-  active_tab_color   = "lualine_a_normal",
-  inactive_tab_color = "lualine_a_active",
-  fugitive_branch_bg = "none",
-  fugitive_branch_fg = "none",
-  diff_added_fg      = '#1abc9c',
-  diff_modified_fg   = '#0db9d7',
-  diff_removed_fg    = '#db4b4b',
+	set = function()
+		vim.cmd.colorscheme("default")
+		vim.g.border_style = "single"
+	end,
+	colors = "default",
+	active_tab_color = "lualine_a_normal",
+	inactive_tab_color = "lualine_a_active",
+	fugitive_branch_bg = "none",
+	fugitive_branch_fg = "none",
+	diff_added_fg = "#1abc9c",
+	diff_modified_fg = "#0db9d7",
+	diff_removed_fg = "#db4b4b",
 }
 
 local M = vim.tbl_deep_extend("force", {}, defaults, theme or {})
@@ -40,4 +40,3 @@ return M
 --   fugitive_branch_fg = theme.normal.a.fg
 --   fugitive_branch_bg = theme.normal.a.bg
 -- end
-

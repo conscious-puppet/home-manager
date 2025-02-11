@@ -1,14 +1,12 @@
 -- local cmd = vim.api.nvim_create_autocmd
 
-vim.cmd [[
+vim.cmd([[
   au BufNewFile,BufRead *.log  :setl ft=log
   au BufNewFile,BufRead *.purs :setl ft=purescript
   autocmd BufEnter,BufRead * normal zR
-]]
+]])
 
-
-
-vim.cmd [[
+vim.cmd([[
   augroup neovim_terminal
       autocmd!
       " Enter Terminal-mode (insert) automatically
@@ -19,12 +17,10 @@ vim.cmd [[
       autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
       autocmd TermClose zsh call feedkeys("i")
   augroup END
-]]
+]])
 
 -- autocmd BufReadPost,FileReadPost * normal zR
 -- au BufNewFile,BufRead *.log :setl ft=json
-
-
 
 -- local api = vim.api
 -- local M = {}
@@ -53,4 +49,3 @@ vim.cmd [[
 -- M.nvim_create_augroups(autoCommands)
 --
 -- return M
-
