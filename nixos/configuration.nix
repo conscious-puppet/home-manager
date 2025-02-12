@@ -15,6 +15,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Disable the GNOME3/GDM auto-suspend feature that cannot be disabled in GUI!
+  # If no user is logged in, the machine will power down after 20 minutes.
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
+
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -57,57 +64,58 @@
   };
 
 
-
-  services.keyd = {
-    enable = true;
-    keyboards = {
-      default = {
-        ids = [ "*" ]; # what goes into the [id] section, here we select all keyboard
-        # extraConfig = builtins.readFile /home/deftdawg/source/meta-mac/keyd/kde-mac-keyboard.conf; # use includes when debugging, easier to edit in vscode
-        extraConfig = ''
-          # Make Apple keyboards work the same way on KDE as they do on MacOS
-          [main]
-          # Bind both "Cmd" keys to trigger the 'meta_mac' layer
-          leftmeta = layer(meta_mac)
-          rightmeta = layer(meta_mac)
-
-          # By default meta_mac = Ctrl+<key>, except for mappings below
-          [meta_mac:C]
-          # Use alternate Copy/Cut/Paste bindings from Windows that won't conflict with Ctrl+C used to break terminal apps
-          # Copy (works everywhere (incl. vscode term) except Konsole)
-          c = C-insert
-
-          # Paste
-          v = S-insert
-          # Cut
-          x = S-delete
-
-          # FIXME: for Konsole, we must create a shortcut in our default Konsole profile to bind Copy's Alternate to 'Ctrl+Ins'
-          # Switch directly to an open tab (e.g., Firefox, VS Code)
-          1 = A-1
-          2 = A-2
-          3 = A-3
-          4 = A-4
-          5 = A-5
-          6 = A-6
-          7 = A-7
-          8 = A-8
-          9 = A-9
-
-          # Move cursor to the beginning of the line
-          left = home
-          # Move cursor to the end of the line
-          right = end
-
-          # As soon as 'tab' is pressed (but not yet released), switch to the 'app_switch_state' overlay
-          tab = swapm(app_switch_state, A-tab)
-
-          [app_switch_state:A]
-          # Being in this state holds 'Alt' down allowing us to switch back and forth with tab or arrow presses
-        '';
-      };
-    };
-  };
+  # services.keyd = {
+  #   enable = true;
+  #   keyboards = {
+  #     default = {
+  #       ids = [ "*" ];
+  #       # https://github.com/rvaiya/keyd/blob/6dc2d5c4ea76802fd192b143bdd53b1787fd6deb/examples/macos.conf
+  #       extraConfig = ''
+  #         # Make Apple keyboards work the same way on KDE as they do on MacOS
+  #         [main]
+  #         # Bind both "Cmd" keys to trigger the 'meta_mac' layer
+  #         leftmeta = layer(meta_mac)
+  #         rightmeta = layer(meta_mac)
+  #
+  #         # By default meta_mac = Ctrl+<key>, except for mappings below
+  #         # [meta_mac:C]
+  #
+  #         [meta_mac]
+  #         # Use alternate Copy/Cut/Paste bindings from Windows that won't conflict with Ctrl+C used to break terminal apps
+  #         # Copy (works everywhere (incl. vscode term) except Konsole)
+  #         c = C-insert
+  #
+  #         # Paste
+  #         v = S-insert
+  #         # Cut
+  #         x = S-delete
+  #
+  #         # FIXME: for Konsole, we must create a shortcut in our default Konsole profile to bind Copy's Alternate to 'Ctrl+Ins'
+  #         # Switch directly to an open tab (e.g., Firefox, VS Code)
+  #         1 = A-1
+  #         2 = A-2
+  #         3 = A-3
+  #         4 = A-4
+  #         5 = A-5
+  #         6 = A-6
+  #         7 = A-7
+  #         8 = A-8
+  #         9 = A-9
+  #
+  #         # Move cursor to the beginning of the line
+  #         left = home
+  #         # Move cursor to the end of the line
+  #         right = end
+  #
+  #         # As soon as 'tab' is pressed (but not yet released), switch to the 'app_switch_state' overlay
+  #         tab = swapm(app_switch_state, A-tab)
+  #
+  #         [app_switch_state:A]
+  #         # Being in this state holds 'Alt' down allowing us to switch back and forth with tab or arrow presses
+  #       '';
+  #     };
+  #   };
+  # };
 
 
 
@@ -163,6 +171,7 @@
     vim
     wget
     git
+    xclip
   ];
   environment.variables.EDITOR = "vim";
 

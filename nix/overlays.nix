@@ -1,6 +1,6 @@
 { inputs, system, ... }: [
   (final: prev: {
-    wezterm = inputs.nixpkgs-24-05.legacyPackages.${system}.wezterm;
+    # wezterm = inputs.nixpkgs-24-05.legacyPackages.${system}.wezterm;
     vimPlugins = prev.vimPlugins // {
       nvim-calltree = prev.vimUtils.buildVimPlugin {
         name = "calltree";

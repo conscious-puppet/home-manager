@@ -12,7 +12,10 @@
         {
           home-manager = {
             users.abhishek = {
-              imports = [ ../home ];
+              imports = [
+                ../home/common
+                ../home/nixos
+              ];
               home.username = "abhishek";
               home.homeDirectory = "/home/abhishek";
               home.stateVersion = "24.11";

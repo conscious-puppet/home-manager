@@ -60,7 +60,8 @@
             inputs.home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
               modules = [
-                ./home
+                ./home/common
+                ./home/macos
                 inputs.nix-doom-emacs-unstraightened.hmModule
                 {
                   home = {

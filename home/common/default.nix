@@ -2,7 +2,7 @@
 # $HOME.
 #
 # https://nix-community.github.io/home-manager/index.html#sec-usage-configuration
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, lib, ... }: {
   imports = [
     ./neovim
     ./vscode
@@ -18,18 +18,6 @@
   #
   # Search for packages here: https://search.nixos.org/packages
   home.packages =
-    let
-      darwinPackages =
-        if pkgs.system == "aarch64-darwin" || pkgs.system == "x86_64-darwin" then
-          with pkgs; [ raycast ]
-        else
-          [ ];
-      linuxPackages =
-        if pkgs.system == "aarch64-linux" || pkgs.system == "x86_64-linux" then
-          with pkgs; [ slack ]
-        else
-          [ ];
-    in
     with pkgs;
     [
       # fonts
@@ -68,7 +56,7 @@
       signal-desktop # Private, simple, and secure messenger
 
       # termpdfpy
-    ] ++ darwinPackages ++ linuxPackages;
+    ];
 
   nix = {
     registry.nixpkgs.flake = inputs.nixpkgs; # https://yusef.napora.org/blog/pinning-nixpkgs-flake/
