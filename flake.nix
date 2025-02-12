@@ -23,34 +23,22 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
-  outputs = inputs@{ self, ... }:
-    let
-      mkHomeConfiguration = pkgs: username:
-        inputs.home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            ./home
-            inputs.nix-doom-emacs-unstraightened.hmModule
-            {
-              home = {
-                inherit username;
-                homeDirectory = "/${if pkgs.stdenv.isDarwin then "Users" else "home"}/${username}";
-                stateVersion = "22.11";
-              };
-            }
-          ];
-          extraSpecialArgs = { inherit inputs; };
-        };
-
-    in
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" "aarch64-darwin" "x86_64-darwin" "aarch64-linux" ];
+
       imports = [
         inputs.treefmt-nix.flakeModule
       ];
 
-      # nixos flake config
-      flake = { };
+      flake = {
+        imports = [
+          ./nixos
+          {
+            _module.args = { inherit inputs; };
+          }
+        ];
+      };
 
       perSystem = { self', inputs', pkgs, system, config, ... }:
         {
@@ -68,7 +56,22 @@
           };
 
           # for macos (only home-manager)
-          legacyPackages.homeConfigurations.abhisheksingh = mkHomeConfiguration pkgs "abhisheksingh";
+          legacyPackages.homeConfigurations.abhisheksingh =
+            inputs.home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+              modules = [
+                ./home
+                inputs.nix-doom-emacs-unstraightened.hmModule
+                {
+                  home = {
+                    username = "abhisheksingh";
+                    homeDirectory = "/Users/abhisheksingh";
+                    stateVersion = "24.11";
+                  };
+                }
+              ];
+              extraSpecialArgs = { inherit inputs; };
+            };
 
           # Enables 'nix run' to activate home-manager.
           apps.default.program = pkgs.writeShellScriptBin "activate-home" ''
@@ -76,7 +79,6 @@
           '';
 
           devShells.default = pkgs.mkShell {
-
             inputsFrom = [
               config.treefmt.build.devShell
             ];

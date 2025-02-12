@@ -42,7 +42,7 @@
 
       # Diagnostics window
       trouble-nvim
-      nvim-calltree
+      # nvim-calltree
       conform-nvim
 
       # Syntax highlighting
@@ -71,7 +71,7 @@
       vim-tmux-navigator
 
       # ui
-      neophyte-nvim
+      # neophyte-nvim
     ];
 
     extraPackages = with pkgs; [

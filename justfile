@@ -6,5 +6,8 @@ fmt:
     treefmt
 
 # Rebuild home-manager config
-switch:
+hm-switch:
     home-manager switch
+
+nx-switch:
+  /run/wrappers/bin/sudo nixos-rebuild switch --flake .#nixos
