@@ -26,7 +26,7 @@
           [ ];
       linuxPackages =
         if pkgs.system == "aarch64-linux" || pkgs.system == "x86_64-linux" then
-          with pkgs; [ ]
+          with pkgs; [ slack ]
         else
           [ ];
     in
