@@ -1,205 +1,178 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ inputs, system, config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Disable the GNOME3/GDM auto-suspend feature that cannot be disabled in GUI!
-  # If no user is logged in, the machine will power down after 20 minutes.
-  systemd.targets.sleep.enable = false;
-  systemd.targets.suspend.enable = false;
-  systemd.targets.hibernate.enable = false;
-  systemd.targets.hybrid-sleep.enable = false;
+  virtualisation.docker.enable = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+  };
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
+  # edit as per your location and timezone
   time.timeZone = "Asia/Kolkata";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_IN";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_IN";
-    LC_IDENTIFICATION = "en_IN";
-    LC_MEASUREMENT = "en_IN";
-    LC_MONETARY = "en_IN";
-    LC_NAME = "en_IN";
-    LC_NUMERIC = "en_IN";
-    LC_PAPER = "en_IN";
-    LC_TELEPHONE = "en_IN";
-    LC_TIME = "en_IN";
+  i18n = {
+    defaultLocale = "en_IN";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_IN";
+      LC_IDENTIFICATION = "en_IN";
+      LC_MEASUREMENT = "en_IN";
+      LC_MONETARY = "en_IN";
+      LC_NAME = "en_IN";
+      LC_NUMERIC = "en_IN";
+      LC_PAPER = "en_IN";
+      LC_TELEPHONE = "en_IN";
+      LC_TIME = "en_IN";
+      LC_CTYPE = "en_US.utf8"; # required by dmenu don't change this
+    };
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # sound.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  services = {
+    xserver = {
+      layout = "us";
+      xkbVariant = "";
+      enable = true;
+      windowManager.i3 = {
+        enable = true;
+        extraPackages = with pkgs; [
+          i3status
+        ];
+      };
+      desktopManager = {
+        xterm.enable = false;
+        xfce = {
+          enable = true;
+          noDesktop = true;
+          enableXfwm = false;
+        };
+      };
+      displayManager = {
+        lightdm.enable = true;
+        defaultSession = "xfce+i3";
+      };
+    };
+    gvfs.enable = true;
+    gnome.gnome-keyring.enable = true;
+    blueman.enable = true;
+    pipewire = {
+      enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      pulse.enable = true;
+    };
+    tailscale.enable = true;
+    openssh = {
+      enable = true;
+      ports = [ 22 ];
+      settings = {
+        PasswordAuthentication = true;
+        PermitRootLogin = "prohibit-password";
+        Macs = [
+          "hmac-sha1"
+          "hmac-sha1-96"
+          "hmac-sha2-256"
+          "hmac-sha2-512"
+          "hmac-md5"
+          "hmac-md5-96"
+          "hmac-md5-etm@openssh.com"
+          "hmac-md5-96-etm@openssh.com"
+          "hmac-sha1-etm@openssh.com"
+          "hmac-sha1-96-etm@openssh.com"
+          "hmac-sha2-256-etm@openssh.com"
+          "hmac-sha2-512-etm@openssh.com"
+          "umac-64-etm@openssh.com"
+          "umac-128-etm@openssh.com"
+        ];
+      };
+    };
   };
 
-
-  # services.keyd = {
-  #   enable = true;
-  #   keyboards = {
-  #     default = {
-  #       ids = [ "*" ];
-  #       # https://github.com/rvaiya/keyd/blob/6dc2d5c4ea76802fd192b143bdd53b1787fd6deb/examples/macos.conf
-  #       extraConfig = ''
-  #         # Make Apple keyboards work the same way on KDE as they do on MacOS
-  #         [main]
-  #         # Bind both "Cmd" keys to trigger the 'meta_mac' layer
-  #         leftmeta = layer(meta_mac)
-  #         rightmeta = layer(meta_mac)
-  #
-  #         # By default meta_mac = Ctrl+<key>, except for mappings below
-  #         # [meta_mac:C]
-  #
-  #         [meta_mac]
-  #         # Use alternate Copy/Cut/Paste bindings from Windows that won't conflict with Ctrl+C used to break terminal apps
-  #         # Copy (works everywhere (incl. vscode term) except Konsole)
-  #         c = C-insert
-  #
-  #         # Paste
-  #         v = S-insert
-  #         # Cut
-  #         x = S-delete
-  #
-  #         # FIXME: for Konsole, we must create a shortcut in our default Konsole profile to bind Copy's Alternate to 'Ctrl+Ins'
-  #         # Switch directly to an open tab (e.g., Firefox, VS Code)
-  #         1 = A-1
-  #         2 = A-2
-  #         3 = A-3
-  #         4 = A-4
-  #         5 = A-5
-  #         6 = A-6
-  #         7 = A-7
-  #         8 = A-8
-  #         9 = A-9
-  #
-  #         # Move cursor to the beginning of the line
-  #         left = home
-  #         # Move cursor to the end of the line
-  #         right = end
-  #
-  #         # As soon as 'tab' is pressed (but not yet released), switch to the 'app_switch_state' overlay
-  #         tab = swapm(app_switch_state, A-tab)
-  #
-  #         [app_switch_state:A]
-  #         # Being in this state holds 'Alt' down allowing us to switch back and forth with tab or arrow presses
-  #       '';
-  #     };
-  #   };
-  # };
-
-
-
-
-
-
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      pulseaudio = true;
+    };
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.abhishek = {
-    isNormalUser = true;
-    description = "abhishek";
-    home = "/home/abhishek";
-    extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
+  users.users = {
+    abhishek = {
+      isNormalUser = true;
+      description = "abhishek";
+      home = "/home/abhishek";
+      extraGroups = [ "networkmanager" "wheel" "docker" ];
+      shell = pkgs.zsh;
+    };
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
+  # password-less sudo
+  security.sudo.wheelNeedsPassword = false;
 
   programs.zsh.enable = true;
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = import ../nix/overlays.nix { inherit inputs system; };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [
-    vim
-    wget
+    wezterm
+    dmenu
     git
+    gnome.gnome-keyring
+    nerdfonts
+    networkmanagerapplet
+    nitrogen
+    pasystray
+    picom
+    polkit_gnome
+    pulseaudioFull
+    rofi
+    vim
+    unrar
+    unzip
+    firefox
     xclip
   ];
-  environment.variables.EDITOR = "vim";
 
+  programs = {
+    thunar.enable = true;
+    dconf.enable = true;
+  };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  security = {
+    polkit.enable = true;
+    rtkit.enable = true;
+  };
 
-  # List services that you want to enable:
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart =
+          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  hardware = {
+    bluetooth.enable = true;
+  };
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  # Don't touch this
+  system.stateVersion = "23.05";
 }

@@ -230,12 +230,13 @@
       PATH="$HOME/.ghcup/bin:$PATH"
       PATH="$HOME/.local/bin:$PATH"
       PATH="/usr/local/opt/llvm@12/bin:$PATH"
+      PATH="$HOME/.nix-profile/bin:$PATH"
 
       export PATH
       export EDITOR='nvim'
       export VISUAL='nvim'
       # Make Nix and home-manager installed things available in PATH.
-      export PATH=$HOME/.nix-profile/bin:/run/current-system/sw/bin/:/nix/var/nix/profiles/default/bin:/etc/profiles/per-user/$USER/bin:$PATH
+      # export PATH=/run/current-system/sw/bin/:/nix/var/nix/profiles/default/bin:/etc/profiles/per-user/$USER/bin:$PATH
     '';
   };
 }
