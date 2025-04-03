@@ -38,67 +38,71 @@
 
   # sound.enable = true;
 
-  services = {
-    xserver = {
-      layout = "us";
-      xkbVariant = "";
+  # services = {
+  # xserver = {
+  #   layout = "us";
+  #   xkbVariant = "";
+  #   enable = true;
+  #   windowManager.i3 = {
+  #     enable = true;
+  #     extraPackages = with pkgs; [
+  #       i3status
+  #     ];
+  #   };
+  #   desktopManager = {
+  #     xterm.enable = false;
+  #     xfce = {
+  #       enable = true;
+  #       noDesktop = true;
+  #       enableXfwm = false;
+  #     };
+  #   };
+  #   displayManager = {
+  #     lightdm.enable = true;
+  #     defaultSession = "xfce+i3";
+  #   };
+  # };
+  # };
+
+  services.gvfs.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  services.blueman.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa = {
       enable = true;
-      windowManager.i3 = {
-        enable = true;
-        extraPackages = with pkgs; [
-          i3status
-        ];
-      };
-      desktopManager = {
-        xterm.enable = false;
-        xfce = {
-          enable = true;
-          noDesktop = true;
-          enableXfwm = false;
-        };
-      };
-      displayManager = {
-        lightdm.enable = true;
-        defaultSession = "xfce+i3";
-      };
+      support32Bit = true;
     };
-    gvfs.enable = true;
-    gnome.gnome-keyring.enable = true;
-    blueman.enable = true;
-    pipewire = {
-      enable = true;
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-      pulse.enable = true;
-    };
-    tailscale.enable = true;
-    openssh = {
-      enable = true;
-      ports = [ 22 ];
-      settings = {
-        PasswordAuthentication = true;
-        PermitRootLogin = "prohibit-password";
-        Macs = [
-          "hmac-sha1"
-          "hmac-sha1-96"
-          "hmac-sha2-256"
-          "hmac-sha2-512"
-          "hmac-md5"
-          "hmac-md5-96"
-          "hmac-md5-etm@openssh.com"
-          "hmac-md5-96-etm@openssh.com"
-          "hmac-sha1-etm@openssh.com"
-          "hmac-sha1-96-etm@openssh.com"
-          "hmac-sha2-256-etm@openssh.com"
-          "hmac-sha2-512-etm@openssh.com"
-          "umac-64-etm@openssh.com"
-          "umac-128-etm@openssh.com"
-        ];
-      };
+    pulse.enable = true;
+  };
+  services.tailscale.enable = true;
+  services.openssh = {
+    enable = true;
+    ports = [ 22 ];
+    settings = {
+      PasswordAuthentication = true;
+      PermitRootLogin = "prohibit-password";
+      Macs = [
+        "hmac-sha1"
+        "hmac-sha1-96"
+        "hmac-sha2-256"
+        "hmac-sha2-512"
+        "hmac-md5"
+        "hmac-md5-96"
+        "hmac-md5-etm@openssh.com"
+        "hmac-md5-96-etm@openssh.com"
+        "hmac-sha1-etm@openssh.com"
+        "hmac-sha1-96-etm@openssh.com"
+        "hmac-sha2-256-etm@openssh.com"
+        "hmac-sha2-512-etm@openssh.com"
+        "umac-64-etm@openssh.com"
+        "umac-128-etm@openssh.com"
+      ];
     };
   };
+
+  # Enable the X11 windowing system
+  services.xserver.enable = true;
 
   nixpkgs = {
     config = {
