@@ -52,6 +52,9 @@ telescope.setup({
 		git_branches = {
 			initial_mode = "normal",
 		},
+		find_files = {
+			hidden = true,
+		},
 	},
 	extensions = {
 		media_files = {
