@@ -7,7 +7,7 @@
   programs.doom-emacs = {
     enable = true;
     # emacs = pkgs.emacs29-pgtk;
-    doomDir = ../doom.d;
+    doomDir = ../../doom.d;
     experimentalFetchTree = true; # Disable if there are fetcher issues
     extraPackages = epkgs: with epkgs; [
       treesit-grammars.with-all-grammars

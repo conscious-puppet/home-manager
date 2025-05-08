@@ -13,6 +13,7 @@
       cmp-buffer
       cmp-path
       nvim-cmp
+      obsidian-nvim
 
       # Snippets
       luasnip
