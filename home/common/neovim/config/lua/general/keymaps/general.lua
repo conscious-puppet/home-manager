@@ -56,33 +56,33 @@ map("n", "<leader>gB", "<cmd>G blame<cr>", opts)
 -- Trouble
 local trouble_status_ok, _ = pcall(require, "trouble")
 if trouble_status_ok then
-	map("n", "<leader>d", "<cmd>Trouble diagnostics toggle filter.buf=0 <cr>", { noremap = true })
-	map("n", "<leader>D", "<cmd>Trouble diagnostics toggle<cr>", { noremap = true })
+  map("n", "<leader>d", "<cmd>Trouble diagnostics toggle filter.buf=0 <cr>", { noremap = true })
+  map("n", "<leader>D", "<cmd>Trouble diagnostics toggle<cr>", { noremap = true })
 end
 
 local gitsigns_status_ok, gitsigns = pcall(require, "gitsigns")
 if gitsigns_status_ok then
-	-- map("n", "[c", "<cmd>Gitsigns prev_hunk<cr>", { noremap = true })
-	-- map("n", "]c", "<cmd>Gitsigns next_hunk<cr>", { noremap = true })
-	map("n", "]c", function()
-		if vim.wo.diff then
-			return "]c"
-		end
-		vim.schedule(function()
-			gitsigns.next_hunk()
-		end)
-		return "<Ignore>"
-	end, { expr = true, noremap = true })
+  -- map("n", "[c", "<cmd>Gitsigns prev_hunk<cr>", { noremap = true })
+  -- map("n", "]c", "<cmd>Gitsigns next_hunk<cr>", { noremap = true })
+  map("n", "]c", function()
+    if vim.wo.diff then
+      return "]c"
+    end
+    vim.schedule(function()
+      gitsigns.next_hunk()
+    end)
+    return "<Ignore>"
+  end, { expr = true, noremap = true })
 
-	map("n", "[c", function()
-		if vim.wo.diff then
-			return "[c"
-		end
-		vim.schedule(function()
-			gitsigns.prev_hunk()
-		end)
-		return "<Ignore>"
-	end, { expr = true, noremap = true })
+  map("n", "[c", function()
+    if vim.wo.diff then
+      return "[c"
+    end
+    vim.schedule(function()
+      gitsigns.prev_hunk()
+    end)
+    return "<Ignore>"
+  end, { expr = true, noremap = true })
 end
 
 -- Navigate buffers

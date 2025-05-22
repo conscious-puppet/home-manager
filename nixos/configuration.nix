@@ -132,7 +132,7 @@
     dmenu
     git
     gnome.gnome-keyring
-    nerdfonts
+    nerd-fonts.iosevka
     networkmanagerapplet
     nitrogen
     pasystray

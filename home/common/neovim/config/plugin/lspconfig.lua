@@ -1,12 +1,12 @@
 local status_ok_lspconfig, lspconfig = pcall(require, "lspconfig")
 
 if not status_ok_lspconfig then
-	return
+  return
 end
 
 local opts = {
-	on_attach = require("general.lsp.handlers").on_attach,
-	capabilities = require("general.lsp.handlers").capabilities,
+  on_attach = require("general.lsp.handlers").on_attach,
+  capabilities = require("general.lsp.handlers").capabilities,
 }
 
 local lua_opts = vim.tbl_deep_extend("force", require("general.lsp.settings.lua_ls"), opts)

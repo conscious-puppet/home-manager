@@ -5,12 +5,9 @@
 { pkgs, inputs, lib, ... }: {
   imports = [
     ./neovim
-    ./vscode
     ./zsh.nix
     ./wezterm.nix
     ./tmux.nix
-    ./helix.nix
-    ./zellij.nix
     # ./emacs.nix
   ];
 
@@ -22,7 +19,7 @@
     [
       # fonts
       iosevka
-      (nerdfonts.override { fonts = [ "Iosevka" ]; })
+      nerd-fonts.iosevka
 
       lite-xl
       neovide
@@ -53,7 +50,6 @@
       nix
       obsidian # note taking app
       asciinema # asciinema is a suite of tools for recording, replaying, and sharing terminal sessions.
-      signal-desktop # Private, simple, and secure messenger
 
       # termpdfpy
     ];

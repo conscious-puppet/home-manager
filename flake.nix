@@ -1,7 +1,7 @@
 {
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpks.follows = "nixos-cosmic/nixpkgs";
+    nixpkgs.follows = "nixos-cosmic/nixpkgs";
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-24-05.url = "github:nixos/nixpkgs/nixos-24.05";
@@ -53,7 +53,11 @@
             projectRootFile = "flake.nix";
             programs = {
               nixpkgs-fmt.enable = true;
-              stylua.enable = true;
+              stylua = {
+                enable = true;
+                settings.indent_type = "Spaces";
+                settings.indent_width = 2;
+              };
             };
           };
 

@@ -1,19 +1,19 @@
 local create_command = vim.api.nvim_create_user_command
 
 local function woman()
-	local telescope_builtin_status_ok, telescope_builtin = pcall(require, "telescope.builtin")
-	if not telescope_builtin_status_ok then
-		return
-	end
-	telescope_builtin.man_pages({ previewer = false })
+  local telescope_builtin_status_ok, telescope_builtin = pcall(require, "telescope.builtin")
+  if not telescope_builtin_status_ok then
+    return
+  end
+  telescope_builtin.man_pages({ previewer = false })
 end
 
 local function preview_notes()
-	local telescope_builtin_status_ok, telescope_builtin = pcall(require, "telescope.builtin")
-	if not telescope_builtin_status_ok then
-		return
-	end
-	telescope_builtin.find_files({ previewer = false, cwd = "~/notes/" })
+  local telescope_builtin_status_ok, telescope_builtin = pcall(require, "telescope.builtin")
+  if not telescope_builtin_status_ok then
+    return
+  end
+  telescope_builtin.find_files({ previewer = false, cwd = "~/notes/" })
 end
 
 create_command("Woman", woman, { desc = "Man Pages" })

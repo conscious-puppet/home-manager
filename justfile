@@ -7,7 +7,7 @@ fmt:
 
 # Rebuild home-manager config
 hm-switch:
-    home-manager switch
+    USER=abhisheksingh home-manager switch
 
 nx-switch *ARGS:
   /run/wrappers/bin/sudo nixos-rebuild switch --flake .#nixos {{ARGS}}

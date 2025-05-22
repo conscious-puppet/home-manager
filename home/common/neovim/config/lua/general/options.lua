@@ -44,7 +44,7 @@ set.foldmethod = "syntax" -- auto folds based on exprs
 set.foldlevel = 99
 set.foldlevelstart = 99
 set.foldtext =
-	[[substitute(getline(v:foldstart),'\\\\t',repeat('\\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
+  [[substitute(getline(v:foldstart),'\\\\t',repeat('\\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
 set.foldenable = false
 set.spell = false -- spell check
 set.spelllang = { "en_us" } -- spell check

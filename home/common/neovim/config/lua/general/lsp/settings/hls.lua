@@ -1,8 +1,8 @@
 return {
-	settings = {
-		haskell = {
-			cabalFormattingProvider = "cabalfmt",
-			formattingProvider = "fourmolu",
-		},
-	},
+  settings = {
+    haskell = {
+      cabalFormattingProvider = "cabalfmt",
+      formattingProvider = "fourmolu",
+    },
+  },
 }

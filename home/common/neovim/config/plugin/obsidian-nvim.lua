@@ -1,10 +1,10 @@
 local status_ok, obsidian = pcall(require, "obsidian")
 
 if not status_ok then
-	return
+  return
 end
 
-obsidian.setup {
+obsidian.setup({
   workspaces = {
     {
       name = "personal",
@@ -15,4 +15,4 @@ obsidian.setup {
       path = "~/Documents/Obsidian Vault",
     },
   },
-}
+})
