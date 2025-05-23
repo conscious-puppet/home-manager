@@ -12,7 +12,6 @@ keymaps.telescope_picker_mapping()
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 local _, telescope_b = pcall(require, "telescope.builtin")
-map("n", "<leader>tt", telescope_b.find_files, opts)
 
 telescope.setup({
   defaults = {

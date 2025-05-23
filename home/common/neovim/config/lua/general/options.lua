@@ -13,7 +13,6 @@ set.cursorline = true -- Highlight the text line of the cursor
 set.expandtab = true -- Enable the use of space in tab
 set.fileencoding = "utf-8" -- File content encoding for the buffer
 set.history = 100 -- Number of commands to remember in a history table
-set.ignorecase = true -- Case insensitive searching
 set.laststatus = 2
 set.lazyredraw = true -- lazily redraw screen
 set.mouse = "a" -- Enable mouse support

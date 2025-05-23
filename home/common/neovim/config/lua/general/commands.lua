@@ -32,8 +32,6 @@ create_command("CopyBufferFilepath", "let @+ = expand('%:p')", { desc = "Copy Bu
 create_command("TodoCapture", ":5sp ~/notes/todo.md", { desc = "Write to todo.md" })
 create_command("WorkCapture", ":5sp ~/notes/work/work.md", { desc = "Write to work.md" })
 
-create_command("WorkCapture", ":5sp ~/notes/work/work.md", { desc = "Write to work.md" })
-
 create_command("Bonly", ":execute '%bdelete | edit # | normal `\"' | bdelete#", { desc = "Buffer only" })
 create_command("LspClearLog", ":!cat /dev/null > ~/.local/state/nvim/lsp.log", { desc = "Clear LSP Logs" })
 

@@ -23,7 +23,6 @@ if status_ok then
     map("n", "<leader>r", vim.lsp.buf.rename, opts)
     -- map("n", "gr", "<cmd>Lspsaga rename<CR>", opts)
     -- map("n", "gr", "<cmd>Lspsaga rename ++project<CR>", opts)
-    map("n", "<leader>r", vim.lsp.buf.rename, opts)
 
     -- map("n", "gd", "<cmd>Lspsaga peek_definition<CR>", opts)
     map("n", "gd", "<cmd>Lspsaga goto_definition<CR>", opts)
