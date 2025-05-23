@@ -52,6 +52,9 @@
       asciinema # asciinema is a suite of tools for recording, replaying, and sharing terminal sessions.
 
       # termpdfpy
+
+      # ai
+      aider-chat # AI pair programming in your terminal
     ];
 
   nix = {
