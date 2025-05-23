@@ -1,4 +1,9 @@
-local _, rust_tools = pcall(require, "rust-tools")
+local status_ok, rust_tools = pcall(require, "rust-tools")
+
+if not status_ok then
+  vim.notify("rust-tools not found!", vim.log.levels.ERROR)
+  return
+end
 
 local border = function()
   if vim.g.border_style == "single" then

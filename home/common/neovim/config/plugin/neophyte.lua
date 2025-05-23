@@ -1,6 +1,7 @@
 local status_ok, neophyte = pcall(require, "neophyte")
 
 if not status_ok then
+  vim.notify("neophyte not found!", vim.log.levels.ERROR)
   return
 end
 

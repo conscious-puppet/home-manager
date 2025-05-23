@@ -1,5 +1,6 @@
 local indent_blankline_status_ok, indent_blankline = pcall(require, "ibl")
 if not indent_blankline_status_ok then
+  vim.notify("ibl not found!", vim.log.levels.ERROR)
   return
 end
 

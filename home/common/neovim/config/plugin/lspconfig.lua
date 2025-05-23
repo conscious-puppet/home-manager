@@ -1,6 +1,7 @@
 local status_ok_lspconfig, lspconfig = pcall(require, "lspconfig")
 
 if not status_ok_lspconfig then
+  vim.notify("lspconfig not found!", vim.log.levels.ERROR)
   return
 end
 

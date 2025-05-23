@@ -1,6 +1,7 @@
 local status_ok, diffview = pcall(require, "diffview")
 
 if not status_ok then
+  vim.notify("diffview not found!", vim.log.levels.ERROR)
   return
 end
 
