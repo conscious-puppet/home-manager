@@ -131,7 +131,7 @@
     wezterm
     dmenu
     git
-    gnome.gnome-keyring
+    gnome-keyring
     nerd-fonts.iosevka
     networkmanagerapplet
     nitrogen
