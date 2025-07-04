@@ -55,6 +55,9 @@
 
       # ai
       aider-chat # AI pair programming in your terminal
+
+
+      podman
     ];
 
   nix = {
