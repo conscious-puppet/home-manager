@@ -44,7 +44,7 @@
 
       # refresh tmux conf
       unbind r
-      bind r source-file ~/.config/tmux/tmux.conf
+      bind r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded!"
 
       # clear screen and history
       bind C-k send-keys -R \; clear-history
