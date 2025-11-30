@@ -23,7 +23,7 @@
       tmux = "tmux -u";
     };
     autosuggestion.enable = true;
-    initExtra = ''
+    initContent = ''
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
       zstyle ':completion:*' menu select
       zmodload zsh/complist

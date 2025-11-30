@@ -27,3 +27,5 @@ lspconfig.ccls.setup(c_opts)
 local pyright_opts = vim.tbl_deep_extend("force", require("general.lsp.settings.pyright"), opts)
 
 lspconfig.pyright.setup(pyright_opts)
+
+lspconfig.ols.setup(opts)

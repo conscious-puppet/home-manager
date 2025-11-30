@@ -41,6 +41,8 @@
         -- color_scheme = "GruvboxDark",
         -- color_scheme = "VSCodeDark+ (Gogh)",
         color_scheme = "kanagawabones",
+        -- color_scheme = "Solarized (dark) (terminal.sexy)",
+        -- color_scheme = "Solarized (light) (terminal.sexy)",
         -- font = wezterm.font("JetBrains Mono"),
         font = wezterm.font_with_fallback({
           {

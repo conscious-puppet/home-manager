@@ -23,6 +23,7 @@
 
       # theme
       kanagawa-nvim
+      solarized-nvim
 
       nvim-colorizer-lua
       indent-blankline-nvim
