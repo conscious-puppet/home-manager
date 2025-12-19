@@ -48,7 +48,7 @@
       tailscale # similar to ngrok
       ncdu # Disk usage analyzer
       nix
-      obsidian # note taking app
+      # obsidian # note taking app
       asciinema # asciinema is a suite of tools for recording, replaying, and sharing terminal sessions.
 
       # termpdfpy

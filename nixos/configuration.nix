@@ -37,36 +37,15 @@
     };
   };
 
-  # sound.enable = true;
+  # pre 25.11
+  # services.xserver.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
-  # services = {
-  # xserver = {
-  #   layout = "us";
-  #   xkbVariant = "";
-  #   enable = true;
-  #   windowManager.i3 = {
-  #     enable = true;
-  #     extraPackages = with pkgs; [
-  #       i3status
-  #     ];
-  #   };
-  #   desktopManager = {
-  #     xterm.enable = false;
-  #     xfce = {
-  #       enable = true;
-  #       noDesktop = true;
-  #       enableXfwm = false;
-  #     };
-  #   };
-  #   displayManager = {
-  #     lightdm.enable = true;
-  #     defaultSession = "xfce+i3";
-  #   };
-  # };
-  # };
+  # post 25.11
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
-  services.gvfs.enable = true;
-  services.gnome.gnome-keyring.enable = true;
   services.blueman.enable = true;
   services.pipewire = {
     enable = true;
@@ -101,9 +80,6 @@
       ];
     };
   };
-
-  # Enable the X11 windowing system
-  services.xserver.enable = true;
 
   nixpkgs = {
     config = {

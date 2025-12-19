@@ -1,12 +1,12 @@
 {
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs.follows = "nixos-cosmic/nixpkgs";
-    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-24-05.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    # nixpkgs.follows = "nixos-cosmic/nixpkgs";
+    # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs-24-05.url = "github:nixos/nixpkgs/nixos-24.05";
 
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-parts.url = "github:hercules-ci/flake-parts";

@@ -7,15 +7,7 @@
         inherit inputs system;
       };
       modules = [
-        {
-          nix.settings = {
-            substituters = [ "https://cosmic.cachix.org/" ];
-            trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-          };
-        }
-        inputs.nixos-cosmic.nixosModules.default
         ./configuration.nix
-        ./cosmic.nix
         inputs.home-manager.nixosModules.home-manager
         {
           home-manager = {

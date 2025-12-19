@@ -39,7 +39,6 @@
       fidget-nvim
       nvim-lspconfig
       nvim-lsp-ts-utils
-      rust-tools-nvim
       nvim-jdtls
 
       # Diagnostics window
