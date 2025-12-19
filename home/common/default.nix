@@ -58,6 +58,7 @@
 
 
       podman
+      podman-compose
     ];
 
   nix = {
