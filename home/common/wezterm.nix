@@ -25,13 +25,14 @@
 
       -- For example, changing the color scheme:
 
-      local keys = {
-        {
-          key = "f",
-          mods = "CMD|CTRL",
-          action = wezterm.action.ToggleFullScreen,
-        },
-      }
+      -- for nix os, this is done by gnome, need to verify for macos
+      -- local keys = {
+      --   {
+      --     key = "f",
+      --     mods = "CMD|CTRL",
+      --     action = wezterm.action.ToggleFullScreen,
+      --   },
+      -- }
 
       -- print(wezterm.color.get_builtin_schemes())
 

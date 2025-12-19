@@ -18,12 +18,10 @@ vim.lsp.config("gopls", opts)
 vim.lsp.enable("gopls")
 
 local c_opts = vim.tbl_deep_extend("force", require("general.lsp.settings.ccls"), opts)
-
 vim.lsp.config("ccls", c_opts)
 vim.lsp.enable("ccls")
 
 local pyright_opts = vim.tbl_deep_extend("force", require("general.lsp.settings.pyright"), opts)
-
 vim.lsp.config("pyright", pyright_opts)
 vim.lsp.enable("pyright")
 

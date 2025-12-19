@@ -1,4 +1,4 @@
 { config, inputs, pkgs, ... }: {
-  imports = [ ];
+  imports = [ ./gnome-settings.nix ];
   home.packages = with pkgs; [ slack lsof ];
 }
