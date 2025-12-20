@@ -5,6 +5,7 @@
     extraConfig = ''
       -- Pull in the wezterm API
       local wezterm = require("wezterm")
+      local is_macos = wezterm.target_triple:find("apple") ~= nil
 
       -- This table will hold the configuration.
       local config = {}
@@ -21,30 +22,20 @@
         end
       end
 
-      -- This is where you actually apply your config choices
+      local keys = {}
 
-      -- For example, changing the color scheme:
+      if is_macos then
+        table.insert(keys, {
+          key = "f",
+          mods = "CMD|CTRL",
+          action = wezterm.action.ToggleFullScreen,
+        })
 
-      -- for nix os, this is done by gnome, need to verify for macos
-      -- local keys = {
-      --   {
-      --     key = "f",
-      --     mods = "CMD|CTRL",
-      --     action = wezterm.action.ToggleFullScreen,
-      --   },
-      -- }
-
-      -- print(wezterm.color.get_builtin_schemes())
+        config.native_macos_fullscreen_mode = true
+      end
 
       merge_tbl(config, {
-        -- color_scheme = "Wryan",
-        -- color_scheme = "Green Screen (base16)",
-        -- color_scheme = "GruvboxDark",
-        -- color_scheme = "VSCodeDark+ (Gogh)",
         color_scheme = "kanagawabones",
-        -- color_scheme = "Solarized (dark) (terminal.sexy)",
-        -- color_scheme = "Solarized (light) (terminal.sexy)",
-        -- font = wezterm.font("JetBrains Mono"),
         font = wezterm.font_with_fallback({
           {
             family = "Iosevka",
@@ -57,12 +48,10 @@
         font_size = 21,
         line_height = 1.2,
         hide_tab_bar_if_only_one_tab = true,
-        native_macos_fullscreen_mode = true,
         keys = keys,
         audible_bell = "Disabled",
       })
 
-      -- and finally, return the configuration to wezterm
       return config
     '';
   };
