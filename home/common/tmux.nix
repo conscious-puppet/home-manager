@@ -15,6 +15,8 @@
     extraConfig = ''
       set -g default-command "${pkgs.zsh}/bin/zsh"
 
+      set -g renumber-windows on
+
       set -g default-terminal "xterm-256color"
       set-option -ga terminal-overrides ",xterm-256color:Tc"
       set -g allow-passthrough on
