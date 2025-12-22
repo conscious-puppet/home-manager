@@ -10,17 +10,18 @@
           meta = layer(mac_meta)
 
           [mac_meta:M]
-          a = C-a
-          c = C-c
-          v = C-v
-          x = C-x
-          z = C-z
-          f = C-f
-          w = C-w
-          t = C-t
-          q = C-q
-          l = C-l
-          r = C-r
+          a     = C-a
+          c     = C-c
+          v     = C-v
+          x     = C-x
+          z     = C-z
+          f     = C-f
+          w     = C-w
+          t     = C-t
+          q     = C-q
+          l     = C-l
+          r     = C-r
+          enter = C-enter
 
           [mac_meta+shift]
           l = M-l
