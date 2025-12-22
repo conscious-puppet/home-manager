@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./keyboard-shortcuts.nix
   ];
 
   # Bootloader.
