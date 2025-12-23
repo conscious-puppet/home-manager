@@ -223,6 +223,30 @@
       #       ssh-add ~/.ssh/id_rsa > /dev/null 2>&1
       #   fi
       # fi
+
+      # added this for macos
+      tailscaled-start() {
+        # tailscaled --tun=userspace-networking --socks5-server=localhost:1055 --outbound-http-proxy-listen=localhost:1055
+
+        # 1. Create a directory for tailscale files
+        mkdir -p ~/.tailscale
+
+        # 2. Start the daemon in userspace mode with custom paths
+        tailscaled \
+          --tun=userspace-networking \
+          --socket=$HOME/.tailscale/tailscaled.sock \
+          --state=$HOME/.tailscale/tailscaled.state \
+          --socks5-server=localhost:1055
+      }
+
+      tailscale-auth() {
+        # tailscale up --accept-dns=false
+        tailscale --socket=$HOME/.tailscale/tailscaled.sock up --accept-dns=false
+      }
+
+      tailscale-status() {
+        tailscale --socket=$HOME/.tailscale/tailscaled.sock status
+      }
     '';
     envExtra = ''
       PATH="/usr/local/sbin:$PATH"
