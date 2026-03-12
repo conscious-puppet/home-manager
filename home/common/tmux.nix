@@ -3,7 +3,7 @@
   programs.tmux = {
     enable = true;
 
-    baseIndex = 1;
+    baseIndex = 0;
     prefix = "C-Space";
 
     plugins = with pkgs; [

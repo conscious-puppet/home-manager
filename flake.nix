@@ -58,7 +58,7 @@
           };
 
           # for macos (only home-manager)
-          legacyPackages.homeConfigurations.abhisheksingh =
+          legacyPackages.homeConfigurations."abhishek.singh1" =
             inputs.home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
               modules = [
@@ -67,8 +67,8 @@
                 inputs.nix-doom-emacs-unstraightened.hmModule
                 {
                   home = {
-                    username = "abhisheksingh";
-                    homeDirectory = "/Users/abhisheksingh";
+                    username = "abhishek.singh1";
+                    homeDirectory = "/Users/abhishek.singh1";
                     stateVersion = "24.11";
                   };
                 }

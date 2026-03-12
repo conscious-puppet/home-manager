@@ -17,6 +17,7 @@
   home.packages =
     with pkgs;
     [
+      git
       # fonts
       iosevka
       nerd-fonts.iosevka
@@ -61,6 +62,10 @@
 
       podman
       podman-compose
+
+      brave
+      google-chrome
+      slack
     ];
 
   nix = {
