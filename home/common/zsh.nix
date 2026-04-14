@@ -21,6 +21,7 @@
       lsp-apply = "git update-index --skip-worktree cabal.project cabal.project.freeze";
       sshL = "ssh -L 127.0.0.1:5601:127.0.0.1:5601 -L 127.0.0.1:8013:127.0.0.1:8013 -L 127.0.0.1:3000:127.0.0.1:3000 -L 127.0.0.1:8081:127.0.0.1:8080";
       tmux = "tmux -u";
+      dtmux = "tmux -L dev -u";
     };
     autosuggestion.enable = true;
     initContent = ''
@@ -99,6 +100,7 @@
       }
 
       alias t="tmux -u attach || tmux -u new"
+      alias dt="tmux -L dev -u attach || tmux -L dev -u new"
 
       nix-store-delete() {
         nix-store -q --referrers-closure $1 | xargs nix-store --option keep-outputs false --option keep-derivations false --delete
@@ -127,6 +129,32 @@
         ) && cd $dir
         local sessionname="$(basename -- $dir)"
         tmux -u new-session -A -s $sessionname
+        cd $pdir
+      }
+
+      dp() {
+        local dir
+        local pdir=$(pwd)
+        dir=$(
+          cd &&
+            fd -0 -I --type d --hidden \
+              --exclude .git \
+              --exclude node_module \
+              --exclude .cache \
+              --exclude .npm \
+              --exclude .mozilla \
+              --exclude .meteor \
+              --exclude .nv \
+              --exclude .vscode \
+              --exclude .cargo \
+              --exclude .direnv \
+              --search-path $HOME/.config \
+              --search-path $HOME/Documents/boks \
+              --search-path $HOME/dev |
+            fzf --read0
+        ) && cd $dir
+        local sessionname="$(basename -- $dir)"
+        tmux -L dev -u new-session -A -s $sessionname
         cd $pdir
       }
 

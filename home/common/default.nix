@@ -54,7 +54,7 @@
       # obsidian # note taking app
       asciinema # asciinema is a suite of tools for recording, replaying, and sharing terminal sessions.
 
-      # termpdfpy
+      tdf # Tui-based PDF viewer
 
       # ai
       aider-chat # AI pair programming in your terminal
@@ -63,9 +63,11 @@
       podman
       podman-compose
 
-      brave
-      google-chrome
-      slack
+      # brave
+      # google-chrome
+      # slack
+
+      obsidian
     ];
 
   nix = {
