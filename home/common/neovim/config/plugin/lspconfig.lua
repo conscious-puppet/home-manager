@@ -1,8 +1,0 @@
-vim.lsp.enable("lua_ls")
-vim.lsp.enable("hls")
-vim.lsp.enable("zls")
-vim.lsp.enable("gopls")
-vim.lsp.enable("ccls")
-vim.lsp.enable("pyright")
-vim.lsp.enable("ols")
-vim.lsp.enable("rust_analyzer")

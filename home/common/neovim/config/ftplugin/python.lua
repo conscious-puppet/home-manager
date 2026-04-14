@@ -1,5 +1,1 @@
-local status_ok, conform = pcall(require, "conform")
-
-if status_ok then
-  vim.keymap.set({ "n", "v" }, "Q", conform.format, { buffer = true, noremap = true })
-end
+vim.keymap.set({ "n", "v" }, "Q", function() require("conform").format({ lsp_fallback = true }) end, { buffer = true, noremap = true })

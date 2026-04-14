@@ -1,24 +1,30 @@
 local M = {}
 
+-- Border configuration for this theme
+M.borders = {
+  style = "single",
+  chars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+}
+
+-- StatusLine colors (dimmed solarized palette)
+M.statusline_colors = {
+  normal = { fg = "#839496", bg = "#073642" },  -- base0 on base02
+  nc = { fg = "#586e75", bg = "#002b36" },      -- base01 on base03
+}
+
 M.set = function()
-  vim.g.solarized_contrast = false
-  vim.g.solarized_borders = true
-  vim.opt.background = 'light'
+  -- Solarized Lua theme settings
+  vim.g.solarized_italics = 1
+  vim.g.solarized_borders = 1
+  vim.g.solarized_disable_background = 0
+
   local theme_set, _ = pcall(vim.cmd.colorscheme, "solarized")
 
   if theme_set then
-    -- override highlight
-    -- vim.api.nvim_set_hl(0, "diffAdded", { bg = "#283b4d" })
-    -- vim.api.nvim_set_hl(0, "diffRemoved", { bg = "#352d3d" })
-    -- vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#3f2d3d", fg = "#3f3f4f" })
-    -- vim.api.nvim_set_hl(0, "diffChanged", { bg = "#272d43" })
-    -- vim.api.nvim_set_hl(0, "LspCodeLens", { fg = "#565f89" })
-    -- vim.api.nvim_set_hl(0, "LspCodeLensSeparator", { fg = "#565f89" })
-    vim.api.nvim_set_hl(0, "FloatBorder", { link = "TelescopeBorder" })
-    vim.api.nvim_set_hl(0, "TroubleNormal", { link = "Normal" })
-    vim.api.nvim_set_hl(0, "TroubleNormalNC", { link = "NormalNC" })
-
-    vim.g.border_style = "single"
+    vim.api.nvim_set_hl(0, "SignColumn", { link = "LineNr", default = false })
+    -- Set StatusLine colors
+    vim.api.nvim_set_hl(0, "StatusLine", M.statusline_colors.normal)
+    vim.api.nvim_set_hl(0, "StatusLineNC", M.statusline_colors.nc)
   end
 end
 

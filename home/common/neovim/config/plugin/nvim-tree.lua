@@ -1,12 +1,17 @@
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 
 if not status_ok then
-  vim.notify("nvim-tree not found!", vim.log.levels.ERROR)
   return
 end
 
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- Global keymaps for nvim-tree
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
+map("n", "<leader>ft", ":NvimTreeToggle<CR>", opts)
+map("n", "<leader>ff", "<cmd>NvimTreeFocus<cr>", opts)
 
 local function on_attach(bufnr)
   local api = require("nvim-tree.api")

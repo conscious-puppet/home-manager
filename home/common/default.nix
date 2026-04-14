@@ -59,7 +59,6 @@
       # ai
       aider-chat # AI pair programming in your terminal
 
-
       podman
       podman-compose
 

@@ -1,78 +1,94 @@
 local create_command = vim.api.nvim_create_user_command
 
 local function woman()
-  local telescope_builtin_status_ok, telescope_builtin = pcall(require, "telescope.builtin")
-  if not telescope_builtin_status_ok then
-    return
+  local ok, builtin = pcall(require, "telescope.builtin")
+  if ok then
+    builtin.man_pages({ previewer = false })
   end
-  telescope_builtin.man_pages({ previewer = false })
 end
 
 local function preview_notes()
-  local telescope_builtin_status_ok, telescope_builtin = pcall(require, "telescope.builtin")
-  if not telescope_builtin_status_ok then
-    return
+  local ok, builtin = pcall(require, "telescope.builtin")
+  if ok then
+    builtin.find_files({ previewer = false, cwd = "~/notes/" })
   end
-  telescope_builtin.find_files({ previewer = false, cwd = "~/notes/" })
+end
+
+local function toggle_quickfix()
+  local qf_open = false
+  for _, win in ipairs(vim.fn.getwininfo()) do
+    if win.quickfix == 1 then
+      qf_open = true
+      break
+    end
+  end
+  if qf_open then
+    vim.cmd.cclose()
+  else
+    vim.cmd.copen()
+  end
+end
+
+local function toggle_loclist()
+  local ll_open = false
+  for _, win in ipairs(vim.fn.getwininfo()) do
+    if win.loclist == 1 then
+      ll_open = true
+      break
+    end
+  end
+  if ll_open then
+    vim.cmd.lclose()
+  else
+    vim.cmd.lopen()
+  end
 end
 
 create_command("Woman", woman, { desc = "Man Pages" })
 create_command("Notes", preview_notes, { desc = "Search Notes" })
 create_command("MYVIMRC", ":e $MYVIMRC", { desc = "Edit Neovim Config" })
 create_command("CDC", ":cd %:p:h", { desc = "Change Global dir to current file" })
-create_command("LDC", ":cd %:p:h", { desc = "Change Local dir to current file" })
+create_command("LDC", ":lcd %:p:h", { desc = "Change Local dir to current file" })
 create_command("Vterm", ":vsp | term", { desc = "Terminal in vertical split" })
 create_command("Sterm", ":9sp | term", { desc = "Terminal in horizontal split" })
 create_command("Nomodifiable", ":set noma", { desc = "Set no modifiable" })
 create_command("Modifiable", ":set ma", { desc = "Set modifiable" })
--- create_command("Bufname", ":keepalt file", { desc = "Rename buffer" })
 create_command("Filetype", ":set filetype", { desc = "Set filetype" })
--- command! -nargs=1 MyCommand call s:MyFunc(myParam)
-create_command("CopyBufferFilepath", "let @+ = expand('%:p')", { desc = "Copy Buffer Filepath" })
+create_command("CopyBufferFilepath", function()
+  vim.fn.setreg("+", vim.fn.expand("%:p"))
+end, { desc = "Copy Buffer Filepath" })
 create_command("TodoCapture", ":5sp ~/notes/todo.md", { desc = "Write to todo.md" })
 create_command("WorkCapture", ":5sp ~/notes/work/work.md", { desc = "Write to work.md" })
 
-create_command("Bonly", ":execute '%bdelete | edit # | normal `\"' | bdelete#", { desc = "Buffer only" })
-create_command("LspClearLog", ":!cat /dev/null > ~/.local/state/nvim/lsp.log", { desc = "Clear LSP Logs" })
+create_command("Bonly", function()
+  local current = vim.fn.bufnr("%")
+  vim.cmd("%bdelete")
+  vim.cmd("buffer " .. current)
+end, { desc = "Buffer only" })
 
-vim.cmd([[
-  function! QuickFixToggle()
-    if empty(filter(getwininfo(), 'v:val.quickfix'))
-      copen
-    else
-      cclose
-    endif
-  endfunction
-]])
+create_command("LspClearLog", function()
+  local log_path = vim.fn.stdpath("state") .. "/lsp.log"
+  io.open(log_path, "w"):close()
+end, { desc = "Clear LSP Logs" })
 
-vim.cmd([[
-  function! LocListToggle()
-    if empty(filter(getwininfo(), 'v:val.loclist'))
-      lopen
-    else
-      lclose
-    endif
-  endfunction
-]])
+create_command("QuickFixToggle", toggle_quickfix, { desc = "Toggle Quickfix List" })
+create_command("LocListToggle", toggle_loclist, { desc = "Toggle Location List" })
 
-vim.cmd([[
-	:command -nargs=1 Bufname keepalt file <args>
-	:command -nargs=1 Type set filetype <args>
+create_command("Bufname", function(opts)
+  vim.cmd("keepalt file " .. opts.args)
+end, { nargs = 1, desc = "Rename buffer" })
 
-  function! NewScratchTab(...)
-      tabnew
-      execute printf('set filetype=%s', a:1)
-  endfunction
+create_command("Type", function(opts)
+  vim.bo.filetype = opts.args
+end, { nargs = 1, desc = "Set filetype" })
 
-	:command -nargs=1 Scratch call NewScratchTab(<f-args>)
-]])
+create_command("Scratch", function(opts)
+  vim.cmd.tabnew()
+  vim.bo.filetype = opts.args
+end, { nargs = 1, desc = "New scratch tab" })
 
-vim.cmd([[
-  function! CopyMessages(...)
-      execute printf('redir @+')
-      execute printf('%smessage', a:1)
-      execute printf('redir END')
-  endfunction
-
-	:command -nargs=1 CopyMessages call CopyMessages(<f-args>)
-]])
+create_command("CopyMessages", function(opts)
+  vim.cmd("redir @+")
+  vim.cmd(opts.args .. "message")
+  vim.cmd("redir END")
+end, { nargs = 1, desc = "Copy messages to clipboard" })

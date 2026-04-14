@@ -1,6 +1,6 @@
 require("general.options")
+require("general.keymap")
 require("general.autocmds")
 require("general.commands")
-require("general.keymaps.general")
 require("general.lsp").setup()
 require("general.themes").set()

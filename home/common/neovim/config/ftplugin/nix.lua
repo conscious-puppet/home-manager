@@ -1,2 +1,1 @@
-local map = vim.keymap.set
-map("n", "Q", "<cmd>%!nixpkgs-fmt<cr>", { buffer = true, noremap = true })
+vim.keymap.set({ "n", "v" }, "Q", function() require("conform").format({ lsp_fallback = true }) end, { buffer = true, noremap = true })

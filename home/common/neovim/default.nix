@@ -13,17 +13,17 @@
       cmp-buffer
       cmp-path
       nvim-cmp
-      obsidian-nvim
 
       # Snippets
       luasnip
       cmp_luasnip
 
       telescope-nvim
+      telescope-fzf-native-nvim
 
       # theme
       kanagawa-nvim
-      solarized-nvim
+      nvim-solarized-lua
 
       nvim-colorizer-lua
       indent-blankline-nvim
@@ -36,23 +36,18 @@
       vim-merginal
 
       # lsp
-      fidget-nvim
       nvim-lspconfig
-      nvim-lsp-ts-utils
-      nvim-jdtls
 
       # Diagnostics window
       trouble-nvim
-      # nvim-calltree
       conform-nvim
 
       # Syntax highlighting
       nvim-treesitter.withAllGrammars
-      vim-just # just file support, mostly for syntax highlighting
+      vim-just
       Jenkinsfile-vim-syntax
 
       # Commenting
-      # nvim-ts-context-commentstring
       comment-nvim
       # Highlight selected symbol
       vim-illuminate
@@ -63,27 +58,19 @@
       oil-nvim
 
       lualine-nvim
-      nvim-navic
-      barbecue-nvim
 
       vim-easy-align
 
       vim-table-mode
       vim-tmux-navigator
-
-      # ui
-      # neophyte-nvim
     ];
 
     extraPackages = with pkgs; [
-      tree-sitter
-      nodejs
-
       # Lua
       lua-language-server
       # Nix
       nil
-      nixpkgs-fmt
+      nixfmt
       statix
       # sh
       shfmt
@@ -100,19 +87,9 @@
       # Telescope tools
       ripgrep
       fd
-
-      # for mkdnflow-nvim
-      luajitPackages.luautf8
-
-      # java language server
-      jdt-language-server
-      lombok
     ];
 
   };
-
-  home.sessionVariables.NVIM_JDT_LANGUAGE_SERVER = "${pkgs.jdt-language-server}/bin/jdt-language-server";
-  home.sessionVariables.NVIM_LOMBOK_JAR = "${pkgs.lombok}/share/java/lombok.jar";
 
   home.file."./.config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/common/neovim/config";
   # home.file."./.config/nvim".source = config.lib.file.mkOutOfStoreSymlink ./config;

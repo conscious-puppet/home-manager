@@ -35,7 +35,8 @@
       end
 
       merge_tbl(config, {
-        color_scheme = "kanagawabones",
+        -- color_scheme = "kanagawabones",
+        color_scheme = "Solarized (dark) (terminal.sexy)",
         font = wezterm.font_with_fallback({
           {
             family = "Iosevka",

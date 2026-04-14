@@ -19,6 +19,10 @@ M.lsp_keymaps = function(client, bufnr)
   map("n", "gl", vim.diagnostic.open_float, opts)
   map("n", "[e", vim.diagnostic.goto_prev, opts)
   map("n", "]e", vim.diagnostic.goto_next, opts)
+  vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
+  if client.config.flags then
+    client.config.flags.allow_incremental_sync = true
+  end
 end
 
 return M

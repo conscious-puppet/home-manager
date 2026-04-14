@@ -14,7 +14,7 @@ end
 require("luasnip/loaders/from_vscode").lazy_load()
 
 local border = cmp.config.window.bordered()
-border.border = vim.g.border_style
+border.border = require("general.themes").get_border_style()
 border.winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None"
 
 cmp.setup({
@@ -41,6 +41,34 @@ cmp.setup({
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
+      local kind_icons = {
+        Text = "Txt",
+        Method = "Mthd",
+        Function = "Fn",
+        Constructor = "Ctor",
+        Field = "Fld",
+        Variable = "Var",
+        Class = "Cls",
+        Interface = "Intf",
+        Module = "Mod",
+        Property = "Prop",
+        Unit = "Unit",
+        Value = "Val",
+        Enum = "Enum",
+        Keyword = "Key",
+        Snippet = "Snip",
+        Color = "Col",
+        File = "File",
+        Reference = "Ref",
+        Folder = "Dir",
+        EnumMember = "EnumMbr",
+        Constant = "Const",
+        Struct = "Strct",
+        Event = "Evt",
+        Operator = "Op",
+        TypeParameter = "TypeParam",
+      }
+      vim_item.kind = (kind_icons[vim_item.kind] or vim_item.kind) .. " " .. vim_item.kind
       vim_item.menu = ({
         nvim_lua = "[LSP]",
         nvim_lsp = "[LSP]",
