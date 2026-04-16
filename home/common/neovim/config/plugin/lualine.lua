@@ -45,13 +45,13 @@ lualine.setup({
     section_separators = { left = "", right = "" },
   },
   winbar = {
-    lualine_a = { { "filename", path = 1 } },
+    lualine_a = { { "filename", path = 1, padding = { left = 0, right = 1 } } },
   },
   inactive_winbar = {
-    lualine_a = { { "filename", path = 1 } },
+    lualine_a = { { "filename", path = 1, padding = { left = 0, right = 1 } } },
   },
   sections = {
-    lualine_a = { "mode" },
+    lualine_a = { { "mode", padding = { left = 0, right = 1 } } },
     lualine_b = { "branch" },
     lualine_c = {
       {
@@ -89,6 +89,7 @@ lualine.setup({
     lualine_z = {
       {
         "tabs",
+        padding = { left = 1, right = 0 },
         tabs_color = {
           active = "StatusLine",
           inactive = "StatusLineNC",
