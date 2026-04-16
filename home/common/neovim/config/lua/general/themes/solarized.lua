@@ -6,10 +6,13 @@ M.borders = {
   chars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 }
 
--- StatusLine colors (dimmed solarized palette)
+-- Dim border/separator color (base02)
+M.border_fg = "#073642"
+
+-- StatusLine colors (no background)
 M.statusline_colors = {
-  normal = { fg = "#839496", bg = "#073642" }, -- base0 on base02
-  nc = { fg = "#586e75", bg = "#002b36" }, -- base01 on base03
+  normal = { fg = "#839496", bg = nil }, -- base0, transparent
+  nc = { fg = "#586e75", bg = nil }, -- base01, transparent
 }
 
 M.set = function()
@@ -23,8 +26,8 @@ M.set = function()
     vim.api.nvim_set_hl(0, "StatusLine", M.statusline_colors.normal)
     vim.api.nvim_set_hl(0, "StatusLineNC", M.statusline_colors.nc)
     vim.api.nvim_set_hl(0, "SignColumn", { link = "LineNr", default = false })
-    vim.api.nvim_set_hl(0, "WinSeparator", { fg = M.statusline_colors.normal.bg, bg = nil, default = false })
-    vim.api.nvim_set_hl(0, "FloatBorder", { fg = M.statusline_colors.normal.bg, bg = nil, default = false })
+    vim.api.nvim_set_hl(0, "WinSeparator", { fg = M.border_fg, bg = nil, default = false })
+    vim.api.nvim_set_hl(0, "FloatBorder", { fg = M.border_fg, bg = nil, default = false })
     vim.api.nvim_set_hl(0, "TelescopeBorder", { link = "FloatBorder", default = false })
     vim.api.nvim_set_hl(0, "IblIndent", { link = "WinSeparator", default = false }) -- Indent Blankline
   end
