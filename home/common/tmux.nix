@@ -22,7 +22,7 @@
       set -g allow-passthrough on
 
       set -g status-style bg=default
-      set -g status-left-length 25
+      set -g status-left-length 100
 
       set -sg escape-time 5
 

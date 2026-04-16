@@ -64,7 +64,7 @@
               modules = [
                 ./home/common
                 ./home/macos
-                inputs.nix-doom-emacs-unstraightened.hmModule
+                # inputs.nix-doom-emacs-unstraightened.hmModule
                 {
                   home = {
                     username = "abhishek.singh1";
