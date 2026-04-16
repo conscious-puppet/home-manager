@@ -22,10 +22,12 @@ M.setup = function()
     },
   })
 
-  -- LSP handler customization
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = themes.get_border_style() })
-  vim.lsp.handlers["textDocument/signatureHelp"] =
-    vim.lsp.with(vim.lsp.handlers.signature_help, { border = themes.get_border_style() })
+  -- LSP signature help border (Neovim 0.11+)
+  -- Note: hover border is set in keymaps/lsp.lua (buffer-local, per client attach)
+  local border = themes.get_border_style()
+  vim.keymap.set("n", "<C-k>", function()
+    vim.lsp.buf.signature_help({ border = border })
+  end, { desc = "LSP Signature Help" })
 end
 
 return M

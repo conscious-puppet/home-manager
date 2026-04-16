@@ -3,7 +3,10 @@ local M = {}
 
 M.lsp_keymaps = function(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
-  map({ "n", "v" }, "K", vim.lsp.buf.hover, opts)
+  local border = require("general.themes").get_border_style()
+  map({ "n", "v" }, "K", function()
+    vim.lsp.buf.hover({ border = border })
+  end, opts)
   map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
   map("n", "<leader>cl", vim.lsp.codelens.run, opts)
 
