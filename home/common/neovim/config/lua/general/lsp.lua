@@ -2,7 +2,7 @@ local M = {}
 
 M.setup = function()
   local themes = require("general.themes")
-  
+
   -- Diagnostic configuration
   vim.diagnostic.config({
     signs = {
@@ -23,14 +23,9 @@ M.setup = function()
   })
 
   -- LSP handler customization
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-    vim.lsp.handlers.hover,
-    { border = themes.get_border_style() }
-  )
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-    vim.lsp.handlers.signature_help,
-    { border = themes.get_border_style() }
-  )
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = themes.get_border_style() })
+  vim.lsp.handlers["textDocument/signatureHelp"] =
+    vim.lsp.with(vim.lsp.handlers.signature_help, { border = themes.get_border_style() })
 end
 
 return M

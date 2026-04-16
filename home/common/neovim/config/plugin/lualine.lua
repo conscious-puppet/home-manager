@@ -90,8 +90,8 @@ lualine.setup({
       {
         "tabs",
         tabs_color = {
-          active = 'StatusLine',
-          inactive = 'StatusLineNC',
+          active = "StatusLine",
+          inactive = "StatusLineNC",
         },
       },
     },

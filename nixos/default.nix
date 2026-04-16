@@ -1,6 +1,10 @@
 # /run/wrappers/bin/sudo nixos-rebuild switch --flake .#nixos
-{ inputs, ... }: {
-  nixosConfigurations.nixos = let system = "x86_64-linux"; in
+{ inputs, ... }:
+{
+  nixosConfigurations.nixos =
+    let
+      system = "x86_64-linux";
+    in
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
       extraArgs = {
