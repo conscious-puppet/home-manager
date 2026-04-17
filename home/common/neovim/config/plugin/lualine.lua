@@ -88,12 +88,12 @@ lualine.setup({
     },
     lualine_z = {
       {
-        "tabs",
-        padding = { left = 1, right = 0 },
-        tabs_color = {
-          active = "StatusLine",
-          inactive = "StatusLineNC",
-        },
+        function()
+          local current = vim.fn.tabpagenr()
+          local total = vim.fn.tabpagenr("$")
+          return current .. "/" .. total
+        end,
+        padding = { left = 1, right = 1 },
       },
     },
   },
