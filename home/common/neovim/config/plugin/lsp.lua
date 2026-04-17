@@ -1,13 +1,27 @@
-local keymaps = require("general.keymaps.lsp")
+local border = require("general.themes").get_border_style()
 
--- Shared on_attach function
 vim.lsp.config("*", {
-  on_attach = function(client, bufnr)
-    keymaps.lsp_keymaps(client, bufnr)
+  handlers = {
+    ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers["textDocument/hover"], {
+      border = border,
+    }),
+    ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers["textDocument/signatureHelp"], {
+      border = border,
+    }),
+  },
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("lsp_keymaps", {}),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    require("general.keymaps.lsp").lsp_keymaps(client, args.buf)
   end,
 })
 
--- Get capabilities (with CMP support)
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if ok then
@@ -16,7 +30,6 @@ end
 
 vim.lsp.config("*", { capabilities = capabilities })
 
--- Enable servers
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("hls")
 vim.lsp.enable("zls")
