@@ -32,6 +32,12 @@
         })
 
         config.native_macos_fullscreen_mode = true
+
+        table.insert(keys, {
+          key = "`",
+          mods = "CMD",
+          action = wezterm.action.ActivateWindowRelative(1),
+        })
       end
 
       merge_tbl(config, {
