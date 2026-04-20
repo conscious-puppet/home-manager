@@ -108,7 +108,7 @@ telescope.setup({
     prompt_prefix = "> ",
     selection_caret = "> ",
     entry_prefix = "  ",
-    wrap_results = false,
+    wrap_results = true,
     selection_strategy = "reset",
     sorting_strategy = "ascending",
     layout_strategy = "horizontal",

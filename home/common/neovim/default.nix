@@ -77,8 +77,8 @@
       # json
       jq
       # Python
-      pyright
-      black
+      basedpyright
+      ruff
       # Typescript
       nodePackages.typescript-language-server
       # Web (ESLint, HTML, CSS, JSON)

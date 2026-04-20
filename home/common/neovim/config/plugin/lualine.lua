@@ -83,8 +83,8 @@ lualine.setup({
     },
     lualine_y = {
       "encoding",
-      { "progress", separator = " ", padding = { left = 1, right = 0 } },
-      { "location", padding = { left = 0, right = 1 } },
+      { "progress", separator = " ", padding = { left = 0, right = 0 } },
+      { "location", padding = { left = 0, right = 0 } },
     },
     lualine_z = {
       {
@@ -93,7 +93,7 @@ lualine.setup({
           local total = vim.fn.tabpagenr("$")
           return current .. "/" .. total
         end,
-        padding = { left = 1, right = 1 },
+        padding = { left = 1, right = 0 },
       },
     },
   },

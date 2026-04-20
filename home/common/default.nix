@@ -7,6 +7,8 @@
     ./neovim
     ./zsh.nix
     ./wezterm.nix
+    ./ghostty.nix
+    ./zathura.nix
     ./tmux.nix
     # ./emacs.nix
   ];
@@ -56,8 +58,9 @@
 
       tdf # Tui-based PDF viewer
 
+
       # ai
-      aider-chat # AI pair programming in your terminal
+      # aider-chat # AI pair programming in your terminal -- moved to open code
 
       podman
       podman-compose
