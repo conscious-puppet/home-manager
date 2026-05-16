@@ -32,6 +32,7 @@ M.set = function()
     vim.api.nvim_set_hl(0, "FloatBorder", { fg = M.border_fg, bg = "NONE", default = false })
     vim.api.nvim_set_hl(0, "TelescopeBorder", { link = "FloatBorder", default = false })
     vim.api.nvim_set_hl(0, "IblIndent", { fg = M.border_fg, bg=nil, default = false }) -- Indent Blankline
+    vim.api.nvim_set_hl(0, "IncSearch", { link = "Search", default = false })
   end
 end
 

@@ -92,3 +92,21 @@ create_command("CopyMessages", function(opts)
   vim.cmd(opts.args .. "message")
   vim.cmd("redir END")
 end, { nargs = 1, desc = "Copy messages to clipboard" })
+
+local function toggle_zen()
+  if vim.g.zen_mode then
+    vim.opt.number = true
+    vim.opt.relativenumber = true
+    vim.opt.signcolumn = "yes"
+    vim.opt.wrap = false
+    vim.g.zen_mode = false
+  else
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+    vim.opt.signcolumn = "no"
+    vim.opt.wrap = true
+    vim.g.zen_mode = true
+  end
+end
+
+create_command("Zen", toggle_zen, { desc = "Toggle zen mode" })

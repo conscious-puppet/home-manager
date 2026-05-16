@@ -77,7 +77,7 @@
       # json
       jq
       # Python
-      basedpyright
+      pyright
       ruff
       # Typescript
       nodePackages.typescript-language-server

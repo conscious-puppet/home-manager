@@ -20,8 +20,9 @@
       inputbar-bg = "#073642";
       inputbar-fg = "#eee8d5";
 
-      highlight-color = "#0a445480";
-      highlight-active-color = "#268bd280";
+      highlight-color = "#0a4454";
+      highlight-active-color = "#268bd2";
+      highlight-fg = "#eee8d5";
 
       completion-group-bg = "#002b36";
       completion-group-fg = "#839496";

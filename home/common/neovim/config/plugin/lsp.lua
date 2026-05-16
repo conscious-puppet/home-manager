@@ -84,6 +84,10 @@ vim.lsp.config("ccls", {
   single_file_support = true,
 })
 
+vim.lsp.config("clangd", {
+  cmd = { "clangd" },
+})
+
 vim.lsp.config("pyright", {
   settings = {
     pyright = {
@@ -102,6 +106,7 @@ vim.lsp.enable("hls")
 vim.lsp.enable("zls")
 vim.lsp.enable("gopls")
 vim.lsp.enable("ccls")
+vim.lsp.enable("clangd")
 vim.lsp.enable("pyright")
 -- vim.lsp.enable("basedpyright")
 vim.lsp.enable("ruff")
