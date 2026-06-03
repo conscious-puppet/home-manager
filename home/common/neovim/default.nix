@@ -5,6 +5,8 @@
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
+    withPython3 = false;
+    withRuby = false;
 
     plugins = with pkgs.vimPlugins; [
       nvim-autopairs
@@ -79,10 +81,6 @@
       # Python
       pyright
       ruff
-      # Typescript
-      nodePackages.typescript-language-server
-      # Web (ESLint, HTML, CSS, JSON)
-      nodePackages.vscode-langservers-extracted
 
       # Telescope tools
       ripgrep
@@ -91,7 +89,11 @@
 
   };
 
-  home.file."./.config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/common/neovim/config";
+  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/common/neovim/config";
+
+  # Prevent home-manager's neovim module from generating nvim/init.lua,
+  # which conflicts with our custom config directory symlink above.
+  xdg.configFile."nvim/init.lua".enable = lib.mkForce false;
   # home.file."./.config/nvim".source = config.lib.file.mkOutOfStoreSymlink ./config;
 }
 

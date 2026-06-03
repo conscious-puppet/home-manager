@@ -22,12 +22,16 @@ end
 
 vim.lsp.config("*", {
   handlers = {
-    ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers["textDocument/hover"], {
-      border = border,
-    }),
-    ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers["textDocument/signatureHelp"], {
-      border = border,
-    }),
+    ["textDocument/hover"] = function(err, result, ctx, config)
+      config = config or {}
+      config.border = border
+      return vim.lsp.handlers["textDocument/hover"](err, result, ctx, config)
+    end,
+    ["textDocument/signatureHelp"] = function(err, result, ctx, config)
+      config = config or {}
+      config.border = border
+      return vim.lsp.handlers["textDocument/signatureHelp"](err, result, ctx, config)
+    end,
   },
 })
 
